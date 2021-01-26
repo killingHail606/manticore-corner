@@ -1,0 +1,15 @@
+Создание \ загрузка фикстур
+    python3 manage.py dumpdata app.model_name --indent 4 > fixtures/file_name.json
+    python3 manage.py loaddata fixtures/model_name.json --app app.model_name
+
+10 слов, цитат и постов:
+    python3 manage.py loaddata fixtures/lexicon-10word.json --app blog.Lexicon && python3 manage.py loaddata fixtures/post-10posts.json --app blog.Post && python3 manage.py loaddata fixtures/quote-10quotes.json --app blog.Quote
+
+Работа с бд:
+    Установка и настройка postgresql:
+        sudo apt update
+        sudo apt install postgresql postgresql-contrib
+        sudo -i -u postgres
+        createuser --interactive
+        ALTER USER owr WITH PASSWORD 'owrPASSWORD';
+        CREATE DATABASE test_database OWNER test_user;

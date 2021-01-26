@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load russian_pluralize %}
+
+{% block other_css %}
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock %}
+
+{% block title %}
+    Поиск -
+{% endblock %}
+
+{% block content %}
+    <div class="find_articles">
+        <h1>Найденные статьи: <span class="count_articles">{{ posts.count }}</span></h1>
+    <div class="full_posts">
+        {% for post in posts %}
+            <div class="post">
+                <div class="image-header">
+                    <a href="{{ post.get_absolute_url }}" class="gradient"><img src="{{ post.main_photo.url }}" alt=""></a>
+                    <div class="featured_post_tag">
+                        <div class="test"></div>
+                        <span>
+                            {% for tag in post.tags.all %}
+                                {{ tag.name }}
+                            {% empty %}
+                                Без категории
+                            {% endfor %}
+                        </span>
+                    </div>
+                </div>
+
+                <h2>
+                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                </h2>
+                <p class="date_published"><span class="left_point"></span><span class="date">{{ post.date_pub|date:"d F Y"}}</span><span class="right_point"></span></p>
+                <div class="text_post">{{ post.body|safe|escape|truncatewords:50 }}</div>
+                <p class="read_more"><a href="{{ post.get_absolute_url }}">Продолжить чтение</a></p>
+                <div class="info">
+                    <table>
+                        <tr>
+                            <td class="likes">{{ post.users_like.count }} {{ post.users_like.count|r_pluralize:'Лайк,Лайка,Лайков' }}</td>
+                            <td class="comments">{{ post.comments.count }} {{ post.comments.count|r_pluralize:'Комментарий,Комментария,Комментариев' }}</td>
+                            <td class="share">{{ post.views }} {{ post.views|r_pluralize:'Просмотр,Просмотра,Просмотров' }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        {% empty %}
+            <p class="empty_posts">Ничего не найдено.</p>
+        {% endfor %}
+
+    </div>
+
+
+    </div>
+
+{% endblock %}

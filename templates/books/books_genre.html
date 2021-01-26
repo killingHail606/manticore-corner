@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block other_css %}
+    <link rel="stylesheet" href="{% static 'css/books_genre.css' %}">
+{% endblock %}
+
+{% block title %}
+    {{ book_section.title }} - {{ book_genre.title }} -
+{% endblock %}
+
+{% block content %}
+    <div class="block_lists">
+        <h2>{{ book_section.title }} - {{ book_genre.title }}</h2>
+        <div class="books">
+            {% for book in books %}
+                <div class="book">
+                    <div class="book_preview">
+                        <a href="{{ book.get_absolute_url }}">
+                            <div class="book_title">{{ book.title }}</div>
+                            <div class="book_author">{{ book.author }}</div>
+                        </a>
+                        <div class="book_cover"><img src="{{ book.book_cover.url }}" alt=""></div>
+                        <div class="book_number_page">{{ book.number_of_pages }} стр.</div>
+                    </div>
+                    <div class="vertical_hr"><p></p></div>
+                    <div class="book_description">
+                        {{ book.description|safe|escape }}
+                        <a href="{{ book.get_absolute_url }}" class="watch_more">Узнать подробнее</a>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+
+
+
+        </div>
+    </div>
+{% endblock %}

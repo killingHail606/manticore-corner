@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load russian_pluralize %}
+{% load static %}
+
+{% block other_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick-theme.css' %}">
+{% endblock %}
+
+{% block header_articles %}
+    <div class="header_articles">
+        {% for random_post in random_posts %}
+            <div class="article">
+                <a href="{{ random_post.get_absolute_url }}">
+                    <img src="{{ random_post.main_photo.url }}" alt="">
+                    <div class="tag">
+                        {% for tag in random_post.tags.all %}
+                            {{ tag.name }}
+                        {% empty %}
+                            Без категории
+                        {% endfor %}
+                    </div>
+                    <div class="description">
+                        <div class="description_wrapper">
+                            <h3>{{ random_post.title }}</h3>
+                            <div class="info">
+                                <div class="date_published">
+                                    {{ random_post.date_pub|date:"d F Y"}}
+                                </div>
+                                <div class="likes">
+                                    <i class="icon-thumbs-up"></i>{{ random_post.users_like.count }}
+                                </div>
+                                <div class="views">
+                                    <i class="icon-eye"></i>{{ random_post.views }}
+                                </div>
+                                <div class="comments">
+                                    <i class="icon-commenting"></i>{{ random_post.comments.count }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="last_posts flex-center">
+        <div class="max--wrapper">
+            <h2 class="uppercase">Последние посты</h2>
+            <div class="last_posts_content">
+                {% for last_post in last_posts %}
+                    <div class="post">
+                        <div class="image-header">
+                            <img src="{{ last_post.main_photo.url }}" alt="">
+                            <div class="featured_post_tag">
+                                <div class="test"></div>
+                                <span>
+                                    {% for tag in last_post.tags.all %}
+                                        {{ tag.name }}
+                                    {% empty %}
+                                        Без категории
+                                    {% endfor %}
+                                </span>
+                            </div>
+                        </div>
+                        <h3><a href="{{ last_post.get_absolute_url }}">{{ last_post.title }}</a></h3>
+                        <div class="description_post">
+                            {{ last_post.body|safe|truncatewords:15 }} <a href="{{ last_post.get_absolute_url }}" id="watch_more">Продолжение.</a>
+                        </div>
+                        <div class="info">
+                            <p class="likes"><i class="icon-thumbs-up"></i>{{ last_post.users_like.count }}</p>
+                            <p class="views"><i class="icon-eye"></i>{{ last_post.views }}</p>
+                            <p class="comments"><i class="icon-commenting"></i>{{ last_post.comments.count }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block other_js %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.header_articles').slick({
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            adaptiveHeight: true,
+            {#autoplay: true,#}
+            {#autoplaySpeed: 4000,#}
+            responsive: [{
+                    breakpoint: 1500,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
+                    }
+                }, {
+                    breakpoint: 1050,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                }, {
+                    breakpoint: 700,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+                // You can unslick at a given breakpoint now by adding:
+                // settings: "unslick"
+                // instead of a settings object
+            ]
+        });
+    });
+</script>
+{% endblock %}

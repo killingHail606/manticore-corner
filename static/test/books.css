@@ -1,0 +1,23 @@
+.block_lists h2 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.block_lists .list {
+    width: 100%;
+    border: 1px solid #d3d3d7;
+    padding: 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.block_lists .list a {
+    color: black;
+}
+
+.block_lists .list:hover a {
+    color: #ff9311;
+    text-decoration: none;
+}

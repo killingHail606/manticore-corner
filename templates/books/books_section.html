@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block other_css %}
+    <link rel="stylesheet" href="{% static 'css/books.css' %}">
+{% endblock %}
+
+{% block title %}
+    {{ book_section.title }} -
+{% endblock %}
+
+{% block content %}
+    <div class="block_lists">
+        <h2>{{ book_section.title }}</h2>
+        <div>{{ book_section.description|safe|escape }}</div>
+        <div class="lists">
+            {% for genre in book_section.genres.all %}
+                <div class="list"><a href="{{ genre.get_absolute_url }}">{{ genre.title }}</a></div>
+            {% endfor %}
+
+
+
+        </div>
+    </div>
+
+{% endblock %}

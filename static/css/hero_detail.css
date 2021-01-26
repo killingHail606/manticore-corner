@@ -1,0 +1,31 @@
+.preview img {
+    max-width: 100%;
+}
+
+.main_img {
+    display: flex;
+    justify-content: center;
+}
+
+.preview .name {
+    font-size: 35px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.about_hero h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+@media only screen and (max-width : 850px) {
+    .preview .name {
+        font-size: 30px;
+    }
+
+    .hero_text {
+        font-size: 14px;
+    }
+}
+

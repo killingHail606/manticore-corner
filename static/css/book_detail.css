@@ -1,0 +1,46 @@
+.book_preview img {
+    max-width: 100%;
+}
+
+.book_main h3 {
+    font-size: 20px !important;
+    font-weight: bold;
+}
+
+.book_left_block .title {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.book_left_block table tr {
+    border-bottom: 1px solid #6d6e76;
+}
+
+.book_left_block table tr:first-child {
+    border-top: 1px solid #6d6e76;
+}
+
+.book_left_block table tr td:first-child {
+    font-weight: bold;
+}
+
+@media only screen and (max-width : 850px) {
+    .detail_block {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width : 576px) {
+    .book_cover {
+        display: flex;
+        justify-content: center;
+    }
+
+    table {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

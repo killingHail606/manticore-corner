@@ -1,0 +1,70 @@
+.find_articles h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.find_articles .article {
+    display: flex;
+    border: 1px solid #d3d3d7;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.find_articles .article .img_of_article {
+    height: 250px;
+    min-width: 250px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.find_articles .article .img_of_article img {
+    height: 100%;
+}
+
+.find_articles .article .content_of_find_article {
+    padding: 20px;
+}
+
+.find_articles .article h3 a {
+    font-size: 20px;
+    color: black;
+}
+
+.find_articles .article .date_published_find_article {
+    color: #999;
+}
+
+.find_articles .info_find_article {
+    margin-bottom: 10px;
+}
+
+.find_articles .text_find_article .next {
+    color: #ff9311;
+}
+
+.find_articles .get_more {
+    text-align: center;
+}
+
+.find_articles .get_more a {
+    padding: 5px 15px;
+    text-transform: uppercase;
+    color: white;
+    background: #ff9311;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.find_articles .get_more a:hover {
+    text-decoration: none;
+    border-radius: 7px;
+    transition: 0.3s all;
+}
+
+@media screen and (max-width: 525px){
+    .find_articles h1 {
+        font-size: 23px !important;
+    }
+}

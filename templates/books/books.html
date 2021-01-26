@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block other_css %}
+    <link rel="stylesheet" href="{% static 'css/books.css' %}">
+{% endblock %}
+
+{% block title %}
+    Книги -
+{% endblock %}
+
+{% block content %}
+    <div class="block_lists">
+        <h2>Книги</h2>
+        <p>Здесь находятся книги, которые я хочу прочитать или же уже прочитал. Вы можете просмотреть эти списки и выбрать чтобы вам почитать такого интересного. К тому же я сделал раздел с книгами, которые рекомендую к
+        чтению. Это те книги, которые по моему мнению, являются очень полезными, те которые должен прочитать каждый уважающий себя человек!)</p>
+        <div class="lists">
+            {% for section in books_sections %}
+                <div class="list"><a href="{{ section.get_absolute_url }}">{{ section.title }}</a></div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

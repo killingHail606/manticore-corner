@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block other_css %}
+    <link rel="stylesheet" href="{% static 'css/my_hero.css' %}">
+{% endblock %}
+
+{% block title %}
+    Стена героев -
+{% endblock %}
+
+{% block content %}
+    <div class="block_my_hero">
+        <h2>Мои герои:</h2>
+        <p>На этой стене находятся люди, которыми я восхищаюсь. Именно благодаря им стираются границы моих возможностей. Эти люди мотивируют совершать что-то необычное и идти до конца в выбранном направлении.</p>
+        <div class="heroes">
+            {% for hero in heroes %}
+                <a href="{{ hero.get_absolute_url }}">
+                    <div class="hero">
+                        <img src="{{ hero.picture_for_wall.url }}" alt="">
+                        <div class="inside_block">
+                            <span>{{ hero.name }}</span>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Регистрация -
+{% endblock %}
+
+{% block content %}
+<div class="sign_up user-login">
+    <h2>Регистрация нового пользователя:</h2>
+    <div class="row">
+        <div class="col-md-8 registration_my_form">
+            <form action="" method="post">
+                {{ form_registration.as_p }}
+                {% csrf_token %}
+                <p class="privacy"><label for="privacy-checkbox">Соглашаюсь с <a href="{% url 'blog:privacy' %}" target="_blank">политикой конфиденциональности</a></label><input type="checkbox" id="privacy-checkbox"></p>
+                <p><button name="registration" class="button-register" disabled>Зарегистрироваться</button> или <a href="{% url 'authorization:login' %}">Войти</a></p>
+            </form>
+        </div>
+        <div class="col-md-4 auth_from_other_sites">
+            <p class="google auth_with"><a href="#"><i class="icon-google"></i>Google</a></p>
+            <p class="facebook auth_with"><a href="#"><i class="icon-facebook"></i>Facebook</a></p>
+            <p class="twitter auth_with"><a href="#"><i class="icon-twitter"></i>Twitter</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block other_js %}
+    <script>
+        $('#privacy-checkbox').on('click', function () {
+            let button = document.querySelector('.button-register');
+            if ( $(this).is(':checked') ) {
+                button.removeAttribute('disabled')
+            } else {
+                button.setAttribute('disabled', 'disabled');
+            }
+        })
+    </script>
+
+{% endblock %}

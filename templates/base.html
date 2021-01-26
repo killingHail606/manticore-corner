@@ -1,0 +1,186 @@
+{% load static %}
+{% load russian_pluralize %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %} Уголок Мантикоры</title>
+    <link rel="stylesheet" href="{% static 'css/animation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontello.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    {% block other_css %}{% endblock %}
+</head>
+<body>
+
+        <div class="upper_header flex-center">
+            <div class="wrapper">
+                <p class="phrase">
+                    Нет завтра - есть сегодня. Нет настроения - есть цель.
+                </p>
+                <div class="buttons">
+                    <div class="users">
+                        {% if request.user.is_authenticated %}
+                            <span class="username"><a href="{% url 'authorization:user_page' %}">Здравствуй, {{ request.user.username }}.</a></span>
+
+                        {% else %}
+                            <div class="menu-sign-in">
+                                <a href="{% url 'authorization:login' %}">Вход</a>
+                            </div>
+                            <div class="menu-sign-up">
+                                <a href="{% url 'authorization:registration' %}">Регистрация</a>
+                            </div>
+                        {% endif %} 
+
+                    </div>
+                    <div class="search">
+                        <form action="{% url 'blog:search' %}" method="post">
+                            {% csrf_token %}
+                            {{ search_form }}
+                            <button class="button-search">Найти</button>
+                        </form>
+
+                        <span class="search_hide" onclick="search_hide()">Скрыть</span>
+                        <span class="search_show" onclick="search_show()">Поиск</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu flex-center">
+            <div class="wrapper">
+                <a href="{% url 'blog:main_blog' %}" class="logo"><span class="yellow"><span class="first-letter">У</span>голок </span><span class="first-letter">М</span>антикоры.</a>
+                <nav>
+                    <a href="{% url 'blog:main_blog' %}" {% if section == 'home' %} class="current_page" {% endif %}>Главная</a>
+                    <a href="{% url 'blog:articles' %}" {% if section == 'articles' %} class="current_page" {% endif %}>Статьи</a>
+                    <a href="{% url 'my_rules:my_rules' %}" {% if section == 'my_rules' %} class="current_page" {% endif %}>Мои правила жизни</a>
+                    <a href="{% url 'books:books' %}" {% if section == 'books' %} class="current_page" {% endif %}>Книги</a>
+                    <a href="{% url 'wall_of_heroes:heroes' %}" {% if section == 'my_heroes' %} class="current_page" {% endif %}>Стена героев</a>
+                    <a href="{% url 'blog:about_blog' %}" {% if section == 'about_blog' %} class="current_page" {% endif %}>О блоге</a>
+                </nav>
+
+                <div class="menu-mobile">
+                    <span class="close-menu" onclick="menu_hide()">&times;</span>
+                    <nav>
+                        <a href="{% url 'blog:main_blog' %}" {% if section == 'home' %} class="current_page" {% endif %}>Главная</a>
+                        <a href="{% url 'blog:articles' %}" {% if section == 'articles' %} class="current_page" {% endif %}>Статьи</a>
+                        <a href="{% url 'my_rules:my_rules' %}" {% if section == 'my_rules' %} class="current_page" {% endif %}>Мои правила жизни</a>
+                        <a href="{% url 'books:books' %}" {% if section == 'books' %} class="current_page" {% endif %}>Книги</a>
+                        <a href="{% url 'wall_of_heroes:heroes' %}" {% if section == 'my_heroes' %} class="current_page" {% endif %}>Стена героев</a>
+                        <a href="{% url 'blog:about_blog' %}" {% if section == 'about_blog' %} class="current_page" {% endif %}>О блоге</a>
+                    </nav>
+
+                    <form action="{% url 'blog:search' %}" method="post" class="search-mobile">
+                        {% csrf_token %}
+                        {{ search_form }}
+                        <br>
+                        <button class="button-search">Найти</button>
+                    </form>
+                </div>
+                <div class="open_menu" onclick="menu_show()">Меню</div>
+            </div>
+
+        </div>
+        {% block header_articles %}{% endblock %}
+
+    <div class="big-wrapper">
+        <div class="row wrapper content_block">
+            <div class="col-md-9">
+                {% block content %}{% endblock %}
+            </div>
+            <div class="col-md-3">
+                <div class="word_day aside">
+                    <h3>Словарный запас</h3>
+                    <p class="word">{% if lexicon is None %}Слово{% else %}{{ lexicon.word }}{% endif %}</p>
+                    <p class="description_word">{% if lexicon is None %}Его описание{% else %}{{ lexicon.description }}{% endif %}</p>
+                </div>
+                <div class="quote_day aside">
+                    <h3>Цитата</h3>
+                    <blockquote>&laquo;{% if quote is None %}Текст цитаты{% else %}{{ quote.body }}{% endif %}&raquo;</blockquote>
+                    <p class="author">{% if quote is None %}Автор{% else %}{{ quote.author }}{% endif %}.</p>
+                </div>
+
+                {% block aside %}{% endblock %}
+
+                <div class="subscribe_telegram aside">
+                    <p>Подписывайся на мой твиттер:</p>
+                    <div class="tg_block">
+                        <a href="https://t.me/manticore_thoughts" target="_blank">
+                            <div class="tg_icon"><i class="icon-twitter"></i></div>
+                            <div class="text_subscribe">
+                                Подписаться
+                            </div>
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="main_footer flex-center">
+           <div class="wrapper">
+               <div class="row">
+                    <div class="col-md-4 about_blog">
+                        <h2>О блоге</h2>
+                        <p>Здесь я рассказываю тебе свои мысли на разные темы, которые связаны с обучением и личностным ростом. Также веду такие разделы сайта, как:</p>
+                        <ul>
+                            <li>Правила моей жизни</li>
+                            <li>Книги, которыми интересуюсь</li>
+                            <li>Моя стена героев</li>
+
+                        </ul>
+                        <img src="{% static 'img/footer/footer_img.png' %}" alt="">
+                    </div>
+                    <div class="col-md-4 last_telegram_posts">
+                        <h2>Мой твиттер:</h2>
+                        <a class="twitter-timeline" data-lang="ru" data-height="220" data-theme="dark" href="https://twitter.com/manticore_thgt?ref_src=twsrc%5Etfw">Tweets by manticore_thgt</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+                    </div>
+                    <div class="col-md-4 subscript_follow_us">
+                        <h2>Хорошего тебе времяпровождения!</h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+
+
+        <div class="row under_footer flex-center">
+            <div class="wrapper">
+                <p>{% now 'Y' %}. Все права защищены.</p>
+                <div class="vertical_hr"></div>
+                <p>
+                    <a href="{% url 'blog:privacy' %}">Политика конфиденциальности</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+    <script>
+        let csrftoken = Cookies.get('csrftoken');
+        function csrfSafeMethod(method) {
+          // these HTTP methods do not require CSRF protection
+          return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        $.ajaxSetup({
+          beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+          }
+        });
+        $(document).ready(function() { {% block domready %}{% endblock %} });
+    </script>
+    {% block other_js %}{% endblock %}
+</body>
+</html>

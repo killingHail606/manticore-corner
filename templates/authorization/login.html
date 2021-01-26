@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Вход -
+{% endblock %}
+
+{% block content %}
+<div class="sign_in user-login">
+    <h2>Войти:</h2>
+    <div class="row">
+        <div class="col-sm-8 registration_my_form">
+            <form action="" method="post">
+                {{ form.errors }}
+                {{ form_login.as_p }}
+                {% csrf_token %}
+                <p><button name="login">Войти</button> или <a href="{% url 'authorization:registration' %}">Зарегистрироваться</a></p>
+            </form>
+        </div>
+        <div class="col-sm-4 auth_from_other_sites">
+            <p class="google auth_with"><a href="#"><i class="icon-google"></i>Google</a></p>
+            <p class="facebook auth_with"><a href="#"><i class="icon-facebook"></i>Facebook</a></p>
+            <p class="twitter auth_with"><a href="#"><i class="icon-twitter"></i>Twitter</a></p>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

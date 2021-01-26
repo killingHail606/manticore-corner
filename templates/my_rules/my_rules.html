@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block other_css %}
+    <link rel="stylesheet" href="{% static 'css/my_rules.css' %}">
+{% endblock %}
+
+{% block title %}
+    Мои правила жизни -
+{% endblock %}
+
+{% block content %}
+    <h1>Мои правила жизни:</h1>
+    <div class="tabs">
+        {% for rule in rules %}
+            <div class="section {% if forloop.first %}section-checked{% endif %}">{{ rule.title }}</div>
+        {% empty %}
+            <div class="section">Пусто...</div>
+        {% endfor %}
+
+        {% for rule in rules %}
+            <div class="rules {% if forloop.first %}show{% endif %}">
+                {{ rule.rules_of_section|safe|escape }}
+            </div>
+        {% empty %}
+            <p>Здесь пока ничего нет(</p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,108 @@
+.heroes {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+h2 {
+    font-weight: bold !important;
+}
+
+.heroes > a {
+    display: block;
+    text-decoration: none;
+    margin: 15px 15px;
+}
+
+.heroes .hero {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.heroes .hero:hover {
+    font-size: 20px;
+    transition: 0.3s all;
+}
+
+.hero .inside_block {
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.hero .inside_block span {
+    text-align: center;
+}
+
+
+.heroes .hero img {
+    height: 250px;
+    width: 250px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+@media only screen and (max-width : 1230px) {
+    .heroes .hero img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .heroes .hero {
+        width: 200px;
+        height: 200px;
+    }
+
+    .heroes .hero .inside_block {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media only screen and (max-width : 766px) {
+    .heroes .hero img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .heroes .hero {
+        width: 150px;
+        height: 150px;
+    }
+
+    .heroes .hero .inside_block {
+        width: 125px;
+        height: 125px;
+    }
+}
+
+@media only screen and (max-width : 390px) {
+    .heroes .hero img {
+        width: 250px;
+        height: 250px;
+    }
+
+    .heroes .hero {
+        width: 250px;
+        height: 250px;
+    }
+
+    .heroes .hero .inside_block {
+        width: 200px;
+        height: 200px;
+    }
+}

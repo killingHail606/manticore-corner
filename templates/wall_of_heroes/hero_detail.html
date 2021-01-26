@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block other_css %}
+    <link rel="stylesheet" href="{% static 'css/hero_detail.css' %}">
+{% endblock %}
+
+{% block title %}
+    {{ hero.name }} -
+{% endblock %}
+
+{% block content %}
+    <div class="preview">
+        <div class="main_img">
+            <img src="{{ hero.picture_for_detail.url }}" alt="">
+        </div>
+        <div class="name">{{ hero.name }}</div>
+    </div>
+    <div class="about_hero">
+        <div class="short_biography">
+            <h2>Краткая биография:</h2>
+            <div class="hero_text">
+                {{ hero.short_biography|safe|escape }}
+            </div>
+        </div>
+        <div class="influenced_me">
+            <h2>Что для меня значит этот человечище:</h2>
+            <div class="hero_text">
+                {{ hero.influenced_me|safe|escape }}
+            </div>
+        </div>
+        <div class="quotes-person">
+                <h2>Цитаты:</h2>
+                <div class="hero_text">
+                    {{ hero.quotes|safe|escape }}
+                </div>
+        </div>
+    </div>
+{% endblock %}

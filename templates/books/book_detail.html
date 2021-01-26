@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block other_css %}
+    <link rel="stylesheet" href="{% static 'css/book_detail.css' %}">
+{% endblock %}
+
+{% block title %}
+    {{ book.title }} -
+{% endblock %}
+
+{% block content %}
+    <div class="row book_left_block">
+        <div class="col-sm-4 book_preview">
+            <div class="book_cover"><img src="{{ book.book_cover.url }}" alt=""></div>
+            <div class="title">{{ book.title }}</div>
+            <table class="book_detail">
+                <tr>
+                    <td>Автор:</td>
+                    <td>{{ book.author }}</td>
+                </tr>
+                <tr>
+                    <td>Год издания:</td>
+                    <td>{{ book.year_publishing }} год</td>
+                </tr>
+                <tr>
+                    <td>Жанр:</td>
+                    <td>{{ genre_of_book }}</td>
+                </tr>
+                <tr>
+                    <td>Количество страниц:</td>
+                    <td>{{ book.number_of_pages }} стр.</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-8 book_main">
+            <div class="book_description">
+                <h3>Описание:</h3>
+                <div class="detail_block">
+                    {{ book.description|safe|escape }}
+                </div>
+            </div>
+            <hr>
+            <div class="book_content">
+                <h3>Содержание:</h3>
+                <div class="detail_block">
+                    {{ book.content|safe|escape }}
+                </div>
+            </div>
+            <hr>
+            <div class="book_retelling">
+                <h3>Краткое изложение книги:</h3>
+                <div class="detail_block">
+                    {{ book.retelling|safe|escape }}
+                </div>
+            </div>
+            <hr>
+            <div class="book_quotes">
+                <h3>Цитаты:</h3>
+                <div class="detail_block">
+                    {{ book.quotes|safe|escape }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

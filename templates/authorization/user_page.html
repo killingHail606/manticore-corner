@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block other_css %}
+    <link rel="stylesheet" href="{% static 'css/user_page.css' %}">
+{% endblock %}
+
+{% block title %}
+    Личная страница -
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-4 left_block">
+            <div class="avatar_user_img">
+                <img src="{{ profile_user.picture.url }}" alt="">
+            </div>
+
+            <form id="update_avatar_form" method="POST" action=""  enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ avatar_form.as_p }}
+
+                <button class='avatar' name="avatar">Сохранить фото</button>
+            </form>
+        </div>
+        <div class="col-md-8 main_block">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ info_form.as_p }}
+                <button name="info">Сохранить изменения</button>
+            </form>
+            <form action="" method="post" class="newsletter-form">
+                {% csrf_token %}
+                {{ newsletters_form.as_p }}
+                <button name="newsletters">Сохранить изменения</button>
+            </form>
+            <form action="" method="post" class="logout">
+                {% csrf_token %}
+                <button name="logout">Выйти</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block other_css %}
+    <link rel="stylesheet" href="{% static 'css/about_blog.css' %}">
+{% endblock %}
+
+{% block title %}
+    О блоге -
+{% endblock %}
+
+{% block content %}
+    <div class="header">
+        <div class="img_header">
+            <img src="{{ about_blog.picture.url }}" alt="">
+        </div>
+        <h2>{{ about_blog.title }}</h2>
+        <div class="text_about_blog">
+            {{ about_blog.body|safe|escape }}
+            <p class="signature">manticore606</p>
+        </div>
+    </div>
+{% endblock %}
