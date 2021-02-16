@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '%*_)wjp0)0%-(0$@w5uydc&-qxl7(s%@xgs3@p$i*x@e%aofnw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['193.164.150.161', '438511-cr02292.tmweb.ru', 'manticore-corner.ru', 'localhost', '127.0.0.1']
 
@@ -139,9 +139,12 @@ DATE_FORMAT = 'd E Y'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-STATIC_DIRS = (os.path.join(BASE_DIR, 'static'))
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

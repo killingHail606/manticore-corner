@@ -2,6 +2,14 @@
 {% load russian_pluralize %}
 {% load static %}
 
+{% block og %}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Уголок Мантикоры">
+<meta property="og:locale" content="ru">
+<meta property="og:title" content="Главная страница">
+<meta property="og:description" content="Блог о чём-то!">
+{% endblock %}
+
 {% block other_css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/slick-theme.css' %}">
