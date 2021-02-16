@@ -11,6 +11,16 @@
     <link rel="stylesheet" href="{% static 'css/articles.css' %}">
 {% endblock %}
 
+{% block og %}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Уголок Мантикоры">
+    <meta property="og:url" content="http://manticore-corner.ru">
+    <meta property="og:locale" content="ru">
+    <meta property="og:title" content="Статьи">
+    <meta property="og:description" content="Статьи о саморазвитии, работе, бизнесе, тайм менеджменте и схожих тематиках">
+    <meta property="og:image" content="http://manticore-corner.ru/static/img/logo.png">
+{% endblock %}
+
 {% block aside %}
     <div class="categories aside">
         <h3>Категории</h3>

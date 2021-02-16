@@ -4,6 +4,16 @@
 Вход -
 {% endblock %}
 
+{% block og %}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Уголок Мантикоры">
+    <meta property="og:url" content="http://manticore-corner.ru">
+    <meta property="og:locale" content="ru">
+    <meta property="og:title" content="Вход">
+    <meta property="og:description" content="Авторизация существующего пользователя на сайт">
+    <meta property="og:image" content="http://manticore-corner.ru/static/img/logo.png">
+{% endblock %}
+
 {% block content %}
 <div class="sign_in user-login">
     <h2>Войти:</h2>

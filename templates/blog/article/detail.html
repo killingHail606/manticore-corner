@@ -6,6 +6,16 @@
     {{ post.title }} -
 {% endblock %}
 
+{% block og %}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Уголок Мантикоры">
+    <meta property="og:url" content="http://manticore-corner.ru">
+    <meta property="og:locale" content="ru">
+    <meta property="og:title" content="{{ post.title }}">
+    <meta property="og:description" content="{{ post.body|safe|escape|truncatewords:20 }}">
+    <meta property="og:image" content="{{ post.main_photo.url }}">
+{% endblock %}
+
 {% block content %}
     <div class="header_article">
         <div class="main_img">

@@ -9,6 +9,16 @@
     О блоге -
 {% endblock %}
 
+{% block og %}
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Уголок Мантикоры">
+    <meta property="og:url" content="http://manticore-corner.ru">
+    <meta property="og:locale" content="ru">
+    <meta property="og:title" content="О блоге">
+    <meta property="og:description" content="{{ about_blog.body|safe|escape|truncatewords:15 }}">
+    <meta property="og:image" content="{{ about_blog.picture.url }}">
+{% endblock %}
+
 {% block content %}
     <div class="header">
         <div class="img_header">

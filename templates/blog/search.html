@@ -10,6 +10,16 @@
     Поиск -
 {% endblock %}
 
+{% block og %}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Уголок Мантикоры">
+    <meta property="og:url" content="http://manticore-corner.ru">
+    <meta property="og:locale" content="ru">
+    <meta property="og:title" content="Поиск">
+    <meta property="og:description" content="Поиск постов на сайте Уголок Мантикоры">
+    <meta property="og:image" content="http://manticore-corner.ru/static/img/logo.png">
+{% endblock %}
+
 {% block content %}
     <div class="find_articles">
         <h1>Найденные статьи: <span class="count_articles">{{ posts.count }}</span></h1>
