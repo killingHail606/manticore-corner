@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block og %}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Уголок Мантикоры">
+<meta property="og:locale" content="ru">
+<meta property="og:title" content="Книги">
+<meta property="og:description" content="Блог о чём-то!">
+{% endblock %}
+
 {% block other_css %}
     <link rel="stylesheet" href="{% static 'css/books.css' %}">
 {% endblock %}
