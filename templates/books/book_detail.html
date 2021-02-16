@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block other_css %}
     <link rel="stylesheet" href="{% static 'css/book_detail.css' %}">
 {% endblock %}
@@ -11,12 +10,12 @@
 {% endblock %}
 
 {% block og %}
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Уголок Мантикоры">
-<meta property="og:locale" content="ru">
-<meta property="og:title" content="{{ book.title }} - {{ book.author }}">
-<meta property="og:description" content="{{book.description|safe|escape|truncatewords:15}}">
-<meta property="og:image" content="{{ book.book_cover.url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Уголок Мантикоры">
+    <meta property="og:locale" content="ru">
+    <meta property="og:title" content="{{ book.title }} - {{ book.author }}">
+    <meta property="og:description" content="{{book.description|safe|escape|truncatewords:15}}">
+    <meta property="og:image" content="{{ book.book_cover.url }}">
 {% endblock %}
 
 {% block content %}
