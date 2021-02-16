@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '%*_)wjp0)0%-(0$@w5uydc&-qxl7(s%@xgs3@p$i*x@e%aofnw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['193.164.150.161', '438511-cr02292.tmweb.ru', 'manticore-corner.ru', 'localhost']
 
 
 # Application definition
@@ -85,19 +85,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'MyBlog.wsgi.application'
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    '56fd62f90c5a.ngrok.io'
-]
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'manticore_thoughts_db',
-        'USER': 'manticore_thoughts',
-        'PASSWORD': 'mypass',
+        'NAME': 'manticore_corner_db',
+        'USER': 'manticore_corner',
+        'PASSWORD': 'jij2gjf',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -143,12 +139,9 @@ DATE_FORMAT = 'd E Y'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
-
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_DIRS = (os.path.join(BASE_DIR, 'static'))
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

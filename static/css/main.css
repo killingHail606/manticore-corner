@@ -203,7 +203,8 @@ input:focus {
 .header_articles {
     display: flex;
     max-width: 100%;
-    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .header_articles .article {
@@ -477,13 +478,13 @@ input:focus {
     font-size: 18px;
     margin-top: 15px;
     margin-bottom: 5px;
-    border-radius: 20px;
+    border: 3px solid transparent;
+    border-image: linear-gradient(to left top, #ff9310 10%, transparent 40%, transparent 60%, #ff9310 90%);
+    border-image-slice: 1;
     display: inline-block;
     padding: 5px 15px;
     text-transform: uppercase;
-    font-weight: bold;
-	background: linear-gradient(90deg, #ee5c87, #f1a4b5, #d587b3);
-    color: white;
+    color: black;
 }
 
 .aside {
@@ -516,12 +517,11 @@ input:focus {
 .quote_day .author {
     display: inline-block;
     padding: 5px 15px;
-    border-radius: 15px;
-background:
-		linear-gradient(rgba(135, 60, 255, 0.4), rgba(135, 60, 255, 0.0) 80%),
-		linear-gradient(-45deg, rgba(120, 155, 255, 0.9) 25%, rgba(255, 160, 65, 0.9) 75%);
     font-weight: bold;
-    color: white;
+    color: #ff9310;
+    border: 3px solid transparent;
+    border-image: linear-gradient(to left top, #000 10%, transparent 40%, transparent 60%, #000 90%);
+    border-image-slice: 1;
 }
 
 .word_day .description_word {
