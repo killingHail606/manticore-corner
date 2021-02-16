@@ -9,6 +9,16 @@
     {{ hero.name }} -
 {% endblock %}
 
+{% block og %}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Уголок Мантикоры">
+    <meta property="og:url" content="http://manticore-corner.ru">
+    <meta property="og:locale" content="ru">
+    <meta property="og:title" content="{{ hero.name }}">
+    <meta property="og:description" content="{{ hero.short_biography|safe|escape|truncatewords:15 }}">
+    <meta property="og:image" content="{{ hero.picture_for_detail.url }}">
+{% endblock %}
+
 {% block content %}
     <div class="preview">
         <div class="main_img">
