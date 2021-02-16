@@ -25,7 +25,7 @@ SECRET_KEY = '%*_)wjp0)0%-(0$@w5uydc&-qxl7(s%@xgs3@p$i*x@e%aofnw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['193.164.150.161', '438511-cr02292.tmweb.ru', 'manticore-corner.ru', 'localhost']
+ALLOWED_HOSTS = ['193.164.150.161', '438511-cr02292.tmweb.ru', 'manticore-corner.ru', 'localhost', '127.0.0.1']
 
 
 # Application definition
