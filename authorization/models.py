@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from PIL import Image
 from django.db import models
 from django.contrib.auth.models import User
@@ -29,9 +31,11 @@ class Profile(models.Model):
     def save_avatar(self, *args, **kwargs):
         if self.picture:
             name_picture = self.picture.__str__()
+            BASE_DIR = Path(__file__).resolve().parent.parent
 
             im = Image.open(self.picture)
             im_new = crop_max_square(im)
-            im_new.save(f'media/profile_images/{name_picture}', quality=95)
+            im_new.save(f'{BASE_DIR}/media/profile_images/{name_picture}', quality=95)
+            print(im_new)
             self.picture = f'/profile_images/{name_picture}'
         super(Profile, self).save(*args, **kwargs)

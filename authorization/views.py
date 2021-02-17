@@ -28,10 +28,7 @@ class Login(View):
                     login(request, user)
                     return redirect('blog:main_blog')
             else:
-                print(self.form_login.add_error('username', 'Вы ввели неверный логин или пароль'))
                 return render(request, self.template, {'form_login': self.form_login} | base_ctx)
-        else:
-            print('its here.')
 
     def get(self, request):
         return render(request, self.template, {'form_login': self.form_login} | base_ctx)
@@ -46,8 +43,6 @@ class Registration(View):
         if self.form_registration.is_valid():
             cd = self.form_registration.cleaned_data
             User.objects.create_user(cd['username'], cd['email'], cd['password1'])
-
-            print(cd)
 
             user = authenticate(request,
                                 username=cd['username'],
@@ -91,8 +86,10 @@ class UserPageView(View):
             profile = Profile.objects.get(user=request.user)
 
             avatar_form = ProfileAvatarForm(instance=profile, data=request.POST, files=request.FILES)
+
             if avatar_form.is_valid():
-                avatar_form.save_avatar()
+                profile.picture = avatar_form.files['picture']
+                profile.save_avatar()
                 messages.success(request, 'Profile updated successfully')
                 return redirect('authorization:user_page')
             else:
@@ -100,11 +97,9 @@ class UserPageView(View):
 
         if 'newsletters' in request.POST:
             profile = Profile.objects.get(user=request.user)
-            print(profile.email_newsletters)
             newsletters_form = NewslettersForm(instance=profile, data=request.POST)
 
             if newsletters_form.is_valid():
-                print(profile.email_newsletters)
                 newsletters_form.save()
                 return redirect('authorization:user_page')
             else:
