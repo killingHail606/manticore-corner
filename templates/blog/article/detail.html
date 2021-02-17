@@ -12,7 +12,7 @@
     <meta property="og:url" content="http://manticore-corner.ru">
     <meta property="og:locale" content="ru">
     <meta property="og:title" content="{{ post.title }}">
-    <meta property="og:description" content="{{post.body|safe|escape|truncatewords:20}}">
+    <meta property="og:description" content="{% autoescape on %}{{post.body}}{% endautoescape %}">
     <meta property="og:image" content="{{ post.main_photo.url }}">
 {% endblock %}
 
