@@ -31,6 +31,7 @@ class Login(View):
                 return render(request, self.template, {'form_login': self.form_login} | base_ctx)
 
     def get(self, request):
+        print('\n\n', 'hi!!!', '\n\n')
         return render(request, self.template, {'form_login': self.form_login} | base_ctx)
 
 
