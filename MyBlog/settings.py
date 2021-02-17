@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'comment',
     'django_extensions',
-    'mailer'
+    'mailer',
+    'social_django',
 ]
 
 LOGIN_URL = 'authorization:login'
@@ -117,6 +118,22 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1078649821977-v5pb725fr9lcutgu13kf2nkbm0apjr94.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'BOigxxvi-XmSEBK4BbYa4iS3'
+
+LOGIN_URL = '/auth/login/google-oauth2/'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
 
 
 # Internationalization
