@@ -24,7 +24,12 @@
         {% for random_post in random_posts %}
             <div class="article">
                 <a href="{{ random_post.get_absolute_url }}">
-                    <img src="{{ random_post.main_photo.url }}" alt="">
+                    {% if random_post.main_photo %}
+                        <img src="{{ random_post.main_photo.url }}" alt="">
+                    {% else %}
+                        <img src="{% static 'img/posts/no-photo-its-bad.jpg' %}" alt="">
+                    {% endif %}
+
                     <div class="tag">
                         {% for tag in random_post.tags.all %}
                             {{ tag.name }}
@@ -66,7 +71,11 @@
                 {% for last_post in last_posts %}
                     <div class="post">
                         <div class="image-header">
-                            <img src="{{ last_post.main_photo.url }}" alt="">
+                            {% if last_post.main_photo %}
+                                <img src="{{ last_post.main_photo.url }}" alt="">
+                            {% else %}
+                                <img src="{% static 'img/posts/no-photo-its-bad.jpg' %}" alt="">
+                            {% endif %}
                             <div class="featured_post_tag">
                                 <div class="test"></div>
                                 <span>
