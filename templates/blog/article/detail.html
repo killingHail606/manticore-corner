@@ -18,9 +18,12 @@
 
 {% block content %}
     <div class="header_article">
-        <div class="main_img">
-            <img src="{{ post.main_photo.url }}" alt="">
-        </div>
+        {% if post.main_photo %}
+            <div class="main_img">
+                <img src="{{ post.main_photo.url }}" alt="">
+            </div>
+        {% endif %}
+
         <div class="article_info">
             <h1>{{ post.title }}</h1>
             <p class="date_published"><span class="left_point"></span><span class="date">{{ post.date_pub|date:"d F Y"}}</span><span class="right_point"></span></p>
