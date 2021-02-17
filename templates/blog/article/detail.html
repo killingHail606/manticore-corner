@@ -13,15 +13,15 @@
     <meta property="og:locale" content="ru">
     <meta property="og:title" content="{{ post.title }}">
     <meta property="og:description" content="{% autoescape on %}{{post.body|truncatewords:20}} {% endautoescape %}">
-{#    <meta property="og:image" content="{{ post.main_photo.url }}">#}
+    {% if post.main_photo %}<meta property="og:image" content="{{ post.main_photo.url }}">{% endif %}
 {% endblock %}
 
 {% block content %}
     <div class="header_article">
         {% if post.main_photo %}
-{#            <div class="main_img">#}
-{#                <img src="{{ post.main_photo.url }}" alt="">#}
-{#            </div>#}
+            <div class="main_img">
+                <img src="{{ post.main_photo.url }}" alt="">
+            </div>
         {% endif %}
 
         <div class="article_info">
