@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 
 from django.shortcuts import render, redirect
 from django.views import View
@@ -60,8 +61,11 @@ class Registration(View):
 
 
 def save_profile(backend, user, response, *args, **kwargs):
-    if user.last_login is None:
+    try:
+        profile_user = Profile.objects.get(user_id=user.id)
+    except Profile.DoesNotExist:
         Profile.objects.create(user_id=user.id)
+
 
 
 class UserPageView(View):
