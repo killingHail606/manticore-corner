@@ -61,9 +61,7 @@ class Registration(View):
 
 
 def save_profile(backend, user, response, *args, **kwargs):
-    profile = user.get_profile()
-    if profile is None:
-        Profile.objects.create(user_id=user.id)
+    Profile.objects.create(user_id=user.id)
 
 
 class UserPageView(View):
