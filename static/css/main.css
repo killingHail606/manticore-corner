@@ -934,39 +934,46 @@ footer .vertical_hr {
 
 
 .user-login .google a {
-    background: #dd1821;
+    background: white;
+    color: #dd1821;
     border: 2px solid #dd1821;
 }
 
 .user-login .google a:hover {
     text-decoration: none;
-    background: white;
-    color: #dd1821;
     transition: all 0.2s;
+    background: #dd1821;
+    color: white;
+    border: 2px solid transparent;
 }
 
 .user-login .facebook a {
-    background: #536da6;
-     border: 2px solid #536da6;
+    background: white;
+    color: #536da6;
+    border: 2px solid #536da6;
+
 }
 
 .user-login .facebook a:hover {
     text-decoration: none;
-    background: white;
-    color: #536da6;
+    color: white;
     transition: all 0.2s;
+    background: #536da6;
+    border: 2px solid transparent;
 }
 
 .user-login .twitter a {
-    background: #5cade1;
-     border: 2px solid #5cade1;
+    background: white;
+    color: #536da6;
+    border: 2px solid #536da6;
 }
 
 .user-login .twitter a:hover {
     text-decoration: none;
-    background: white;
-    color: #5cade1;
+    background: #536da6;
     transition: all 0.2s;
+    color: white;
+    border: 2px solid transparent;
 }
 
 .user-login .telegram a {
