@@ -60,6 +60,12 @@ class Registration(View):
         return render(request, self.template, {'form_registration': self.form_registration} | base_ctx )
 
 
+def save_profile(backend, user, response, *args, **kwargs):
+    profile = user.get_profile()
+    if profile is None:
+        Profile.objects.create(user_id=user.id)
+
+
 class UserPageView(View):
     def post(self, request):
         profile_user = Profile.objects.get(user=request.user)
