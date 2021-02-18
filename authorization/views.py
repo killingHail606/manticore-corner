@@ -31,7 +31,6 @@ class Login(View):
                 return render(request, self.template, {'form_login': self.form_login} | base_ctx)
 
     def get(self, request):
-        print('\n\n', 'hi!!!', '\n\n')
         return render(request, self.template, {'form_login': self.form_login} | base_ctx)
 
 
@@ -61,7 +60,8 @@ class Registration(View):
 
 
 def save_profile(backend, user, response, *args, **kwargs):
-    Profile.objects.create(user_id=user.id)
+    if user.last_login is None:
+        Profile.objects.create(user_id=user.id)
 
 
 class UserPageView(View):
