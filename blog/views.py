@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.views import View
 from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateResponseMixin
@@ -195,3 +195,22 @@ def post_like(request):
         except:
             pass
     return JsonResponse({'status': 'ok'})
+
+
+def handler404(request, template_name="errors/404.html"):
+    response = render(template_name)
+    response.status_code = 404
+    return response
+
+
+def handler500(request, template_name="errors/500.html"):
+    response = render(template_name)
+    response.status_code = 500
+    return response
+
+# def handler404(request, *args, **kwargs):
+#     return render(request, 'errors/404.html')
+#
+#
+# def handler500(request, *args, **kwargs):
+#     return render(request, 'errors/500.html')
