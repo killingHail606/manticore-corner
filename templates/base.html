@@ -53,7 +53,7 @@
         </div>
         <div class="menu flex-center">
             <div class="wrapper">
-                <a href="{% url 'blog:main_blog' %}" class="logo"><span class="yellow"><span class="first-letter">У</span>голок </span><span class="first-letter">М</span>антикоры.</a>
+                <h1><a href="{% url 'blog:main_blog' %}" class="logo"><span class="yellow"><span class="first-letter">У</span>голок </span><span class="first-letter">М</span>антикоры.</a></h1>
                 <nav>
                     <a href="{% url 'blog:main_blog' %}" {% if section == 'home' %} class="current_page" {% endif %}>Главная</a>
                     <a href="{% url 'blog:articles' %}" {% if section == 'articles' %} class="current_page" {% endif %}>Статьи</a>
