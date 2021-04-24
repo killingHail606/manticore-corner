@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
 
     'blog.apps.BlogConfig',
     'books.apps.BooksConfig',
@@ -47,10 +48,10 @@ INSTALLED_APPS = [
 
     'tinymce',
     'taggit',
-    'sorl.thumbnail',
+    # 'sorl.thumbnail',
     'comment',
     'django_extensions',
-    'mailer',
+    # 'mailer',
     'social_django',
 ]
 
@@ -97,8 +98,6 @@ WSGI_APPLICATION = 'MyBlog.wsgi.application'
 #              # If one doesn't exist, it will be created at migration time.
 #     }
 # }
-
-
 
 # POSTRES
 DATABASES = {
