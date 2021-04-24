@@ -204,7 +204,7 @@ input:focus {
     display: flex;
     max-width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .header_articles .article {
