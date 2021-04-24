@@ -476,6 +476,7 @@ input:focus {
 .word_day .word {
     text-align: center;
     font-size: 18px;
+    font-weight: bold;
     margin-top: 15px;
     margin-bottom: 5px;
     border: 3px solid transparent;
