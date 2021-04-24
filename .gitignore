@@ -1,5 +1,14 @@
 #MyBlog/settings.py
-media
+/media
+/cache
+/posts
+/static/admin
+/static/tinymce
+/static/django_tinymce
+/static/django_extensions
+*/__pychache__
+/.idea
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
