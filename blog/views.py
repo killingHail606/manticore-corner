@@ -73,6 +73,7 @@ class Articles(TemplateResponseMixin, View):
                'posts': posts,
                'all_tags': all_tags,
                } | base_ctx
+        print('brackpoint5')
         return self.render_to_response(ctx)
 
 
