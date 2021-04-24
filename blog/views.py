@@ -40,6 +40,7 @@ class Articles(TemplateResponseMixin, View):
     template_name = 'blog/articles.html'
 
     def get(self, request, slug=None):
+        print('one')
         base_ctx = {
             'lexicon': lexicon(),
             'quote': quote(),
@@ -49,9 +50,12 @@ class Articles(TemplateResponseMixin, View):
             posts = Post.objects.filter(status='published')
             section = 'articles'
         else:
+            print('two')
             if slug == '':
+                print('three')
                 posts = Post.objects.filter(status='published')
             else:
+                print('four')
                 tag_posts = Tag.objects.get(slug=slug)
                 posts = Post.objects.filter(status='published', tags=tag_posts)
                 section = None
