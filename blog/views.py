@@ -1,16 +1,21 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 from django.views import View
 from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateResponseMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
+from django.contrib.sitemaps import Sitemap
+
 from taggit.models import Tag
 
 from authorization.models import Profile
 from .models import Post, AboutBlog, Comment
+from books.models import Book
+from wall_of_heroes.models import Hero
 from .functions import get_random_posts, lexicon, quote
 from .forms import CommentForm, SearchForm
 
@@ -218,9 +223,71 @@ def handler500(request, *args, **kwargs):
 
     return render(request, 'errors/500.html', base_ctx, status=500)
 
-# def handler404(request, *args, **kwargs):
-#     return render(request, 'errors/404.html')
-#
-#
-# def handler500(request, *args, **kwargs):
-#     return render(request, 'errors/500.html')
+
+class StaticSitemap(Sitemap):
+    changefreq = "daily"
+    priority = 0.9
+    protocol = 'https'
+
+    def items(self):
+        return ['blog:main_blog', 'blog:articles', 'blog:about_blog']
+
+    def location(self, item):
+        return reverse(item)
+
+
+class WallRulesSitemap(Sitemap):
+    changefreq = "daily"
+    priority = 0.5
+    protocol = 'https'
+
+    def items(self):
+        return ['my_rules:my_rules', 'wall_of_heroes:heroes']
+
+    def location(self, item):
+        return reverse(item)
+
+
+class BlogSitemap(Sitemap):
+    changefreq = "never"
+    priority = 0.5
+    protocol = 'https'
+
+    def items(self):
+        return Post.objects.filter(status='published')
+
+    def location(self, obj):
+        return obj.get_absolute_url()
+
+    def lastmod(self, obj):
+        return obj.date_pub
+
+
+class BooksSitemap(Sitemap):
+    changefreq = "never"
+    priority = 0.5
+    protocol = 'https'
+
+    def items(self):
+        return Book.objects.filter()
+
+    def location(self, obj):
+        return obj.get_absolute_url()
+
+    def lastmod(self, obj):
+        return obj.date_pub
+
+
+class HeroesSitemap(Sitemap):
+    changefreq = "never"
+    priority = 0.5
+    protocol = 'https'
+
+    def items(self):
+        return Hero.objects.filter()
+
+    def location(self, obj):
+        return obj.get_absolute_url()
+
+    def lastmod(self, obj):
+        return obj.date_pub

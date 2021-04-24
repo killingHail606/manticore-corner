@@ -40,7 +40,7 @@ class BooksGenre(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=250)
     author = models.CharField(max_length=150)
-    book_cover = models.ImageField(upload_to='books/%Y/%m/%d', blank=True)
+    book_cover = models.ImageField(upload_to='books/%Y/%m/%d')
     number_of_pages = models.IntegerField()
     year_publishing = models.IntegerField()
     description = models.TextField(blank=True)

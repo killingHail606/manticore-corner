@@ -2,10 +2,22 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls import handler400, handler403, handler404, handler500
+from django.conf.urls import handler404, handler500
+
+from django.contrib.sitemaps.views import sitemap
 
 from django.contrib.auth.views import auth_logout
 from django.views.generic import TemplateView
+
+from blog.views import StaticSitemap, WallRulesSitemap, BlogSitemap, BooksSitemap, HeroesSitemap
+
+sitemaps = {
+    'static': StaticSitemap,
+    'wall_rules': WallRulesSitemap,
+    'blog': BlogSitemap,
+    'books': BooksSitemap,
+    'heroes': HeroesSitemap,
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,6 +35,8 @@ urlpatterns = [
         "robots.txt",
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
     ),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap')
 ]
 
 if settings.DEBUG:
