@@ -518,7 +518,7 @@ input:focus {
 .quote_day .author {
     display: inline-block;
     padding: 5px 15px;
-    font-weight: bold;
+    font-weight: 500;
     color: #ff9310;
     border: 3px solid transparent;
     border-image: linear-gradient(to left top, #000 10%, transparent 40%, transparent 60%, #000 90%);
