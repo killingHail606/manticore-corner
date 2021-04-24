@@ -39,14 +39,16 @@ class MainPage(TemplateResponseMixin, View):
 class Articles(TemplateResponseMixin, View):
     template_name = 'blog/articles.html'
 
-    def get(self, request, slug=None):
+    print('brackpoint1')
 
+    def get(self, request, slug=None):
+        print('brackpoint2')
         base_ctx = {
             'lexicon': lexicon(),
             'quote': quote(),
             'search_form': SearchForm(),
         }
-
+        print('brackpoint3')
         if slug is None:
             posts = Post.objects.filter(status='published')
             section = 'articles'
@@ -55,6 +57,7 @@ class Articles(TemplateResponseMixin, View):
             posts = Post.objects.filter(status='published', tags=tag_posts)
             section = None
 
+        print('brackpoint4')
         all_tags = Tag.objects.all()
         paginator = Paginator(posts, 6)
         page = request.GET.get('page')
