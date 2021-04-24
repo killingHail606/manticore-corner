@@ -90,27 +90,27 @@ WSGI_APPLICATION = 'MyBlog.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 #SQLITE
-DATABASES = {
-    'default': {
-    'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': 'db.sqlite3', # This is where you put the name of the db file.
-             # If one doesn't exist, it will be created at migration time.
-    }
-}
+# DATABASES = {
+#     'default': {
+#     'ENGINE': 'django.db.backends.sqlite3',
+#     'NAME': 'db.sqlite3', # This is where you put the name of the db file.
+#              # If one doesn't exist, it will be created at migration time.
+#     }
+# }
 
 
 
 # POSTRES
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'manticore_corner_db',
-#         'USER': 'manticore_corner',
-#         'PASSWORD': 'jij2gjf',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'manticore_corner_db',
+        'USER': 'manticore_corner',
+        'PASSWORD': 'jij2gjf',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation
