@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.conf.urls import handler400, handler403, handler404, handler500
 
 from django.contrib.auth.views import auth_logout
-
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -19,6 +19,10 @@ urlpatterns = [
     path('', include('social_django.urls', namespace='social')),
     path('api/', include('comment.api.urls')),  # only required for API Framework
     path('logout/', auth_logout, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
+    path(
+        "robots.txt",
+        TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
+    ),
 ]
 
 if settings.DEBUG:

@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 
 from . import views
 
@@ -14,5 +14,4 @@ urlpatterns = [
     path('like/', views.post_like, name='post_like'),
     path('comment/', views.post_comment, name='post_comment'),
     path('search/', views.SearchView.as_view(), name='search'),
-
 ]
