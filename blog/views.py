@@ -53,7 +53,7 @@ class Articles(TemplateResponseMixin, View):
             if slug == '':
                 posts = Post.objects.filter(status='published')
             else:
-                tag_posts = Tag.objects.get_object_or_404(slug=slug)
+                tag_posts = get_object_or_404(Tag, slug=slug)
                 posts = Post.objects.filter(status='published', tags=tag_posts)
                 section = None
 
