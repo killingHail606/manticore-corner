@@ -23,3 +23,5 @@ Disallow: /comment/
 Disallow: /user_page/
 Disallow: /like/
 Disallow: /like/
+
+Sitemap: https://manticore-corner.ru/sitemap.xml
