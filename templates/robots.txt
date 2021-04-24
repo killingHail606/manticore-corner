@@ -10,3 +10,16 @@ Disallow: /comment/
 Disallow: /user_page/
 Disallow: /like/
 Disallow: /like/
+
+User-agent: Googlebot
+Disallow: /tinymce/
+Disallow: /comment/
+Disallow: /api/
+Disallow: /logout/
+Disallow: /privacy/
+Disallow: /like/
+Disallow: /search/
+Disallow: /comment/
+Disallow: /user_page/
+Disallow: /like/
+Disallow: /like/
