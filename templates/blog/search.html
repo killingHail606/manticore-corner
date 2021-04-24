@@ -27,7 +27,13 @@
         {% for post in posts %}
             <div class="post">
                 <div class="image-header">
-                    <a href="{{ post.get_absolute_url }}" class="gradient"><img src="{{ post.main_photo.url }}" alt=""></a>
+                    <a href="{{ post.get_absolute_url }}" class="gradient">
+                        {% if random_post.main_photo %}
+                        <img src="{{ post.main_photo.url }}" alt="">
+                        {% else %}
+                            <img src="{% static 'img/posts/no-photo-its-bad.jpg' %}" alt="">
+                        {% endif %}
+                    </a>
                     <div class="featured_post_tag">
                         <div class="test"></div>
                         <span>

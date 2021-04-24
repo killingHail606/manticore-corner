@@ -2,7 +2,7 @@ from django.views import View
 from django.views.generic.base import TemplateResponseMixin
 
 from .models import BooksSection, BooksGenre, Book
-from blog.functions import base_ctx
+from blog.functions import lexicon, quote, SearchForm
 
 
 class BooksView(TemplateResponseMixin, View):
@@ -10,6 +10,12 @@ class BooksView(TemplateResponseMixin, View):
     template_name = 'books/books.html'
 
     def get(self, *args, **kwargs):
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
         ctx = {'section': 'books',
                'books_sections': self.books_sections,
                } | base_ctx
@@ -20,8 +26,13 @@ class BooksSectionView(TemplateResponseMixin, View):
     template_name = 'books/books_section.html'
 
     def get(self, *args, **kwargs):
-        book_section = BooksSection.objects.get(slug=kwargs['slug'])
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
 
+        book_section = BooksSection.objects.get(slug=kwargs['slug'])
         return self.render_to_response({'book_section': book_section} | base_ctx)
 
 
@@ -29,6 +40,12 @@ class BooksGenreView(TemplateResponseMixin, View):
     template_name = 'books/books_genre.html'
 
     def get(self, *args, **kwargs):
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
         book_section = BooksSection.objects.get(slug=kwargs['slug_section'])
         book_genre = BooksGenre.objects.get(slug=kwargs['slug_genre'])
         books = Book.objects.filter(genre=book_genre)
@@ -43,6 +60,12 @@ class BookDetailView(TemplateResponseMixin, View):
     template_name = 'books/book_detail.html'
 
     def get(self, *args, **kwargs):
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
         book = Book.objects.get(slug=kwargs['slug'])
         genre_of_book = (str(book.genre).split(' - ')[1])
 

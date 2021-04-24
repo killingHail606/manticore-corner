@@ -1,13 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
 
 from django.shortcuts import render, redirect
 from django.views import View
 
-from blog.functions import base_ctx
+from blog.functions import lexicon, quote, SearchForm
 
 from .forms import LoginForm, RegistrationForm, ProfileAvatarForm, ProfileInfoForm, NewslettersForm
 from .models import Profile
@@ -18,6 +16,12 @@ class Login(View):
     template = 'authorization/login.html'
 
     def post(self, request):
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
         self.form_login = LoginForm(request.POST)
         if self.form_login.is_valid():
             cd = self.form_login.cleaned_data
@@ -32,6 +36,12 @@ class Login(View):
                 return render(request, self.template, {'form_login': self.form_login} | base_ctx)
 
     def get(self, request):
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
         return render(request, self.template, {'form_login': self.form_login} | base_ctx)
 
 
@@ -40,6 +50,12 @@ class Registration(View):
     template = 'authorization/registration.html'
 
     def post(self, request):
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
         self.form_registration = RegistrationForm(request.POST)
         if self.form_registration.is_valid():
             cd = self.form_registration.cleaned_data
@@ -57,6 +73,12 @@ class Registration(View):
             return render(request, self.template, {'form_registration': self.form_registration} | base_ctx)
 
     def get(self, request):
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
         return render(request, self.template, {'form_registration': self.form_registration} | base_ctx )
 
 
@@ -70,6 +92,12 @@ def save_profile(backend, user, response, *args, **kwargs):
 
 class UserPageView(View):
     def post(self, request):
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
         profile_user = Profile.objects.get(user=request.user)
         avatar_form = ProfileAvatarForm(instance=Profile)
         info_form = ProfileInfoForm(instance=request.user)
@@ -119,6 +147,12 @@ class UserPageView(View):
             return redirect('blog:main_blog')
 
     def get(self, request):
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
         profile_user = Profile.objects.get(user=request.user)
         avatar_form = ProfileAvatarForm(instance=profile_user)
         info_form = ProfileInfoForm(instance=request.user)

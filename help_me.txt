@@ -4,6 +4,7 @@
 
 10 слов, цитат и постов:
     python3 manage.py loaddata fixtures/lexicon-10word.json --app blog.Lexicon && python3 manage.py loaddata fixtures/post-10posts.json --app blog.Post && python3 manage.py loaddata fixtures/quote-10quotes.json --app blog.Quote
+    python manage.py loaddata fixtures/lexicon-10word.json --app blog.Lexicon && python manage.py loaddata fixtures/post-10posts.json --app blog.Post && python manage.py loaddata fixtures/quote-10quotes.json --app blog.Quote
 
 Работа с бд:
     Установка и настройка postgresql:

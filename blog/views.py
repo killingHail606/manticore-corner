@@ -11,20 +11,27 @@ from taggit.models import Tag
 
 from authorization.models import Profile
 from .models import Post, AboutBlog, Comment
-from .functions import get_random_posts, base_ctx
-from .forms import CommentForm
+from .functions import get_random_posts, lexicon, quote
+from .forms import CommentForm, SearchForm
 
 
 class MainPage(TemplateResponseMixin, View):
-    last_posts = Post.objects.filter(status='published').order_by('-date_pub')[:4]
-    random_posts = get_random_posts(last_posts)[:4]
 
     template_name = 'blog/home.html'
 
     def get(self, request):
+        last_posts = Post.objects.filter(status='published').order_by('-date_pub')[:4]
+        random_posts = get_random_posts(last_posts)[:4]
+
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
         ctx = {'section': 'home',
-               'random_posts': self.random_posts,
-               'last_posts': self.last_posts,
+               'random_posts': random_posts,
+               'last_posts': last_posts,
                } | base_ctx
         return self.render_to_response(ctx)
 
@@ -33,6 +40,13 @@ class Articles(TemplateResponseMixin, View):
     template_name = 'blog/articles.html'
 
     def get(self, request, slug=None):
+
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
         if slug is None:
             posts = Post.objects.filter(status='published')
             section = 'articles'
@@ -66,6 +80,12 @@ class PostDetailView(TemplateResponseMixin, View):
         post = get_object_or_404(Post, slug=kwargs['slug'])
         profiles = Profile.objects.all()
 
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
         post.views += 1
         post.save()
         comment_form = CommentForm()
@@ -86,6 +106,12 @@ class SearchView(TemplateResponseMixin, View):
             Q(title__icontains=search_request) | Q(body__icontains=search_request)
         )
 
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
         print(search_request)
         ctx = {
             'posts': posts,
@@ -93,14 +119,28 @@ class SearchView(TemplateResponseMixin, View):
         return self.render_to_response(ctx)
 
     def get(self, request):
-        return self.render_to_response(context={})
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
+        return self.render_to_response(context=base_ctx)
 
 
 class AboutBlogView(TemplateResponseMixin, View):
     template_name = 'blog/about_blog.html'
 
     def get(self, request):
-        about_blog = AboutBlog.objects.all()[0]
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+        if len(AboutBlog.objects.all()) > 0:
+            about_blog = AboutBlog.objects.all()[0]
+        else:
+            about_blog = ''
         ctx = {'section': 'about_blog',
                'about_blog': about_blog,
                } | base_ctx
@@ -111,7 +151,13 @@ class PrivacyView(TemplateResponseMixin, View):
     template_name = 'blog/privacy.html'
 
     def get(self, request):
-        return self.render_to_response({})
+        base_ctx = {
+            'lexicon': lexicon(),
+            'quote': quote(),
+            'search_form': SearchForm(),
+        }
+
+        return self.render_to_response(base_ctx)
 
 
 @login_required
