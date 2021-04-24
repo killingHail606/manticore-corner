@@ -47,6 +47,7 @@ class Articles(TemplateResponseMixin, View):
             'search_form': SearchForm(),
         }
         if slug is None:
+            print('two')
             posts = Post.objects.filter(status='published')
             section = 'articles'
         else:
