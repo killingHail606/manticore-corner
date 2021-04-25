@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.datastructures import MultiValueDictKeyError
 
 from django.shortcuts import render, redirect
 from django.views import View
@@ -126,9 +127,11 @@ class UserPageView(View):
             avatar_form = ProfileAvatarForm(instance=profile, data=request.POST, files=request.FILES)
 
             if avatar_form.is_valid():
-                profile.picture = avatar_form.files['picture']
-                profile.save_avatar()
-                messages.success(request, 'Profile updated successfully')
+                try:
+                    profile.picture = avatar_form.files['picture']
+                    profile.save_avatar()
+                except MultiValueDictKeyError:
+                    pass
                 return redirect('authorization:user_page')
             else:
                 return redirect('authorization:user_page')

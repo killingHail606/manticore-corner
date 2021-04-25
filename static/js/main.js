@@ -52,16 +52,20 @@ function hideTabsContent(a){
 	}	
 }
 
-document.querySelector('.tabs').onclick = function(event){
-	let target = event.target;
-	if(target.className == 'section'){
-		for(let i = 0; i < tab.length; i++){
-			if(target == tab[i]){
-				showTabsContent(i);
-				break;
+try {
+	document.querySelector('.tabs').onclick = function (event) {
+		let target = event.target;
+		if (target.className == 'section') {
+			for (let i = 0; i < tab.length; i++) {
+				if (target == tab[i]) {
+					showTabsContent(i);
+					break;
+				}
 			}
 		}
 	}
+} catch (e) {
+	
 }
 
 function showTabsContent(b){
@@ -73,4 +77,22 @@ function showTabsContent(b){
 	}
 }
 
+let form_label = document.querySelector('#update_avatar_form label');
+
+let button = document.querySelector('#id_picture')
+button.addEventListener('change', () => {
+	let oFile = button.files[0];
+	form_label.innerText = oFile['name'];
+	console.log();
+})
+
+// $(document).ready( function() {
+//   $('#falseinput').click(function(){
+//     $("#id_picture").click();
+//   });
+// });
+//
+// $('#id_picture').change(function() {
+//   $('#selected_filename').text($('#id_picture')[0].files[0].name);
+// });
 

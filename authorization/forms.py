@@ -38,6 +38,9 @@ class ProfileAvatarForm(forms.ModelForm):
         labels = {
             'picture': 'Изменить фото'
         }
+        widgets = {
+            'picture': forms.FileInput(),
+        }
         fields = ('picture',)
 
 

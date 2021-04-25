@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from PIL import Image
@@ -23,7 +24,7 @@ def crop_max_square(pil_img):
 class Profile(models.Model):
     user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
     email_newsletters = models.BooleanField(default=False)
-    picture = models.ImageField(upload_to='profile_images/', default='user/no-avatar.png')
+    picture = models.ImageField(upload_to='profile_images/', blank=True)
 
     def __str__(self):
         return self.user.username
@@ -35,7 +36,7 @@ class Profile(models.Model):
 
             im = Image.open(self.picture)
             im_new = crop_max_square(im)
+
             im_new.save(f'{BASE_DIR}/media/profile_images/{name_picture}', quality=95)
-            print(im_new)
             self.picture = f'/profile_images/{name_picture}'
         super(Profile, self).save(*args, **kwargs)
