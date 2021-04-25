@@ -45,14 +45,11 @@ INSTALLED_APPS = [
     'authorization.apps.AuthorizationConfig',
     'wall_of_heroes.apps.WallOfHeroesConfig',
     'my_rules.apps.MyRulesConfig',
-    # 'likes.apps.LikesConfig',
 
     'tinymce',
     'taggit',
-    # 'sorl.thumbnail',
     'comment',
     'django_extensions',
-    # 'mailer',
     'social_django',
 ]
 
@@ -155,7 +152,7 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'europe/kiev'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
