@@ -155,7 +155,7 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'europe/kiev'
 
 USE_I18N = True
 

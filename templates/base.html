@@ -11,12 +11,11 @@
 
     {% endblock %}
     <title>{% block title %}{% endblock %} Уголок Мантикоры</title>
-    <link rel="stylesheet" href="{% static 'css/animation.css' %}">
+
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'css/fontello.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
     {% block other_css %}{% endblock %}
+
+    <link rel="shortcut icon" href="{% static 'img/favicon-small.ico' %}" type="image/x-icon">
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -29,46 +28,55 @@
             accurateTrackBounce:true
        });
     </script>
-{#    <noscript><div><img src="https://mc.yandex.ru/watch/76479670" style="position:absolute; left:-9999px;" alt="" /></div></noscript>#}
-    <!-- /Yandex.Metrika counter -->
 </head>
 <body>
-        <div class="upper_header flex-center">
-            <div class="wrapper">
-                <p class="phrase">
-                    Нет завтра - есть сегодня. Нет настроения - есть цель!
-                </p>
-                <div class="buttons">
-                    <div class="users">
-                        {% if request.user.is_authenticated %}
-                            <span class="username"><a href="{% url 'authorization:user_page' %}">Здравствуй, {{ request.user.username }}.</a></span>
+    <div class="upper_header flex-center">
+        <div class="wrapper">
+            <p class="phrase">
+                Нет завтра - есть сегодня. Нет настроения - есть цель!
+            </p>
+            <div class="buttons">
+                <div class="users">
+                    {% if request.user.is_authenticated %}
+                        <span class="username"><a href="{% url 'authorization:user_page' %}">Здравствуй, {{ request.user.username }}.</a></span>
 
-                        {% else %}
-                            <div class="menu-sign-in">
-                                <a href="{% url 'authorization:login' %}">Вход</a>
-                            </div>
-                            <div class="menu-sign-up">
-                                <a href="{% url 'authorization:registration' %}">Регистрация</a>
-                            </div>
-                        {% endif %} 
+                    {% else %}
+                        <div class="menu-sign-in">
+                            <a href="{% url 'authorization:login' %}">Вход</a>
+                        </div>
+                        <div class="menu-sign-up">
+                            <a href="{% url 'authorization:registration' %}">Регистрация</a>
+                        </div>
+                    {% endif %}
 
-                    </div>
-                    <div class="search">
-                        <form action="{% url 'blog:search' %}" method="post">
-                            {% csrf_token %}
-                            {{ search_form }}
-                            <button class="button-search">Найти</button>
-                        </form>
+                </div>
+                <div class="search">
+                    <form action="{% url 'blog:search' %}" method="post">
+                        {% csrf_token %}
+                        {{ search_form }}
+                        <button class="button-search">Найти</button>
+                    </form>
 
-                        <span class="search_hide" onclick="search_hide()">Скрыть</span>
-                        <span class="search_show" onclick="search_show()">Поиск</span>
-                    </div>
+                    <span class="search_hide" onclick="search_hide()">Скрыть</span>
+                    <span class="search_show" onclick="search_show()">Поиск</span>
                 </div>
             </div>
         </div>
-        <div class="menu flex-center">
-            <div class="wrapper">
-                <h1><a href="{% url 'blog:main_blog' %}" class="logo"><span class="yellow"><span class="first-letter">У</span>голок </span><span class="first-letter">М</span>антикоры.</a></h1>
+    </div>
+    <div class="menu flex-center">
+        <div class="wrapper">
+            <h1><a href="{% url 'blog:main_blog' %}" class="logo"><span class="yellow"><span class="first-letter">У</span>голок </span><span class="first-letter">М</span>антикоры.</a></h1>
+            <nav>
+                <a href="{% url 'blog:main_blog' %}" {% if section == 'home' %} class="current_page" {% endif %}>Главная</a>
+                <a href="{% url 'blog:articles' %}" {% if section == 'articles' %} class="current_page" {% endif %}>Статьи</a>
+                <a href="{% url 'my_rules:my_rules' %}" {% if section == 'my_rules' %} class="current_page" {% endif %}>Мои правила жизни</a>
+                <a href="{% url 'books:books' %}" {% if section == 'books' %} class="current_page" {% endif %}>Книги</a>
+                <a href="{% url 'wall_of_heroes:heroes' %}" {% if section == 'my_heroes' %} class="current_page" {% endif %}>Стена героев</a>
+                <a href="{% url 'blog:about_blog' %}" {% if section == 'about_blog' %} class="current_page" {% endif %}>О блоге</a>
+            </nav>
+
+            <div class="menu-mobile">
+                <span class="close-menu" onclick="menu_hide()">&times;</span>
                 <nav>
                     <a href="{% url 'blog:main_blog' %}" {% if section == 'home' %} class="current_page" {% endif %}>Главная</a>
                     <a href="{% url 'blog:articles' %}" {% if section == 'articles' %} class="current_page" {% endif %}>Статьи</a>
@@ -78,29 +86,18 @@
                     <a href="{% url 'blog:about_blog' %}" {% if section == 'about_blog' %} class="current_page" {% endif %}>О блоге</a>
                 </nav>
 
-                <div class="menu-mobile">
-                    <span class="close-menu" onclick="menu_hide()">&times;</span>
-                    <nav>
-                        <a href="{% url 'blog:main_blog' %}" {% if section == 'home' %} class="current_page" {% endif %}>Главная</a>
-                        <a href="{% url 'blog:articles' %}" {% if section == 'articles' %} class="current_page" {% endif %}>Статьи</a>
-                        <a href="{% url 'my_rules:my_rules' %}" {% if section == 'my_rules' %} class="current_page" {% endif %}>Мои правила жизни</a>
-                        <a href="{% url 'books:books' %}" {% if section == 'books' %} class="current_page" {% endif %}>Книги</a>
-                        <a href="{% url 'wall_of_heroes:heroes' %}" {% if section == 'my_heroes' %} class="current_page" {% endif %}>Стена героев</a>
-                        <a href="{% url 'blog:about_blog' %}" {% if section == 'about_blog' %} class="current_page" {% endif %}>О блоге</a>
-                    </nav>
-
-                    <form action="{% url 'blog:search' %}" method="post" class="search-mobile">
-                        {% csrf_token %}
-                        {{ search_form }}
-                        <br>
-                        <button class="button-search">Найти</button>
-                    </form>
-                </div>
-                <div class="open_menu" onclick="menu_show()">Меню</div>
+                <form action="{% url 'blog:search' %}" method="post" class="search-mobile">
+                    {% csrf_token %}
+                    {{ search_form }}
+                    <br>
+                    <button class="button-search">Найти</button>
+                </form>
             </div>
-
+            <div class="open_menu" onclick="menu_show()">Меню</div>
         </div>
-        {% block header_articles %}{% endblock %}
+
+    </div>
+    {% block header_articles %}{% endblock %}
 
     <div class="big-wrapper">
         <div class="row wrapper content_block">
@@ -176,11 +173,15 @@
         </div>
     </footer>
 
+    <link rel="stylesheet" href="{% static 'css/bootstrap-4.1.1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontello.css' %}">
+
     <script src="{% static 'js/main.js' %}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
+    <script src="{% static 'js/js.cookie.min.js' %}"></script>
+    <script src="{% static 'js/slick.min.js' %}"></script>
 
     <script>
         let csrftoken = Cookies.get('csrftoken');
