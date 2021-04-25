@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load russian_pluralize %}
+{% load tz %}
 
 {% block title %}
     {{ post.title }} -
@@ -90,7 +91,12 @@
                     <div class="comment_content">
                         <div class="info_comment">
                             <div class="name">{{ comment.user.username }}</div>
-                            <div class="date_published_comment">{{ comment.date_pub|date:'Y.m.d - H:i' }}</div>
+                            <div class="date_published_comment">
+                                {% timezone "Europe/Kiev" %}
+                                    {{ comment.date_pub|date:'Y.m.d - H:i' }}
+                                {% endtimezone %}
+
+                            </div>
                         </div>
                         <div class="text_of_comment">
                             {{ comment.body }}

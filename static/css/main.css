@@ -690,6 +690,7 @@ footer ul {
 footer hr {
     width: 100%;
     background: #6d6e76;
+    margin: 0;
 }
 
 footer .about_blog img{
@@ -756,6 +757,13 @@ footer .subscript_follow_us form button:hover{
 
 footer .under_footer {
     margin-right: 0 !important;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+footer .under_footer p {
+    margin-bottom: 0;
 }
 
 footer .under_footer .wrapper {

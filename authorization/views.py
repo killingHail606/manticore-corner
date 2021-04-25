@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.shortcuts import render, redirect
 from django.views import View
@@ -153,7 +154,11 @@ class UserPageView(View):
             'search_form': SearchForm(),
         }
 
-        profile_user = Profile.objects.get(user=request.user)
+        try:
+            profile_user = Profile.objects.get(user=request.user)
+        except ObjectDoesNotExist:
+            logout(request)
+            return redirect('blog:main_blog')
         avatar_form = ProfileAvatarForm(instance=profile_user)
         info_form = ProfileInfoForm(instance=request.user)
         newsletters_form = NewslettersForm(instance=profile_user)
