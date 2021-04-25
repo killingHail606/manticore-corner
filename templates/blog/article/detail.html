@@ -165,13 +165,18 @@
                     new_comment_div.innerHTML = `
     {% for comment in post.comments.all %}
         {% for profile in profiles %}
-            {% if profile.user == comment.user %}
+            {% if profile.user == request.user %}
 
 
             {% endif %}
         {% endfor %}
     {% endfor %}
-    <div class="author_avatar"><img src="{{ profile.picture.url }}" alt=""></div>
+    {% for profile in profiles %}
+        {% if profile.user == request.user %}
+            <div class="author_avatar"><img src="{{ profile.picture.url }}" alt=""></div>
+        {% endif %}
+    {% endfor %}
+
     <div class="comment_content">
         <div class="info_comment">
             <div class="name">{{ request.user.username }}</div>
