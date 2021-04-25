@@ -15,6 +15,7 @@
 		url('../font/postretro/posteretro.woff') format('woff'), /* Firefox >= 3.6, any other modern browser */
 		url('../font/postretro/posteretro.ttf') format('truetype'), /* Safari, Android, iOS */
 		url('../font/postretro/posteretro.svg#posteretro') format('svg'); /* Chrome < 4, Legacy iOS */
+    font-display: swap;
 }
 
 html {

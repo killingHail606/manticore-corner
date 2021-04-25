@@ -162,7 +162,23 @@
                     let time_of_comment = `${year}.${month}.${day} - ${hour}:${minutes}`
 
                     new_comment_div.className = 'comment';
-                    new_comment_div.innerHTML = `{% for comment in post.comments.all %}{% for profile in profiles %}{% if profile.user == comment.user %}<div class="author_avatar"><img src="{{ profile.picture.url }}" alt=""></div>{% endif %}{% endfor %}{% endfor %}<div class="comment_content"><div class="info_comment"><div class="name">{{ request.user.username }}</div><div class="date_published_comment">${time_of_comment}</div></div><div class="text_of_comment">${text_of_comment}</div></div>`;
+                    new_comment_div.innerHTML = `
+    {% for comment in post.comments.all %}
+        {% for profile in profiles %}
+            {% if profile.user == comment.user %}
+
+
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    <div class="author_avatar"><img src="{{ profile.picture.url }}" alt=""></div>
+    <div class="comment_content">
+        <div class="info_comment">
+            <div class="name">{{ request.user.username }}</div>
+            <div class="date_published_comment">${time_of_comment}</div>
+        </div>
+        <div class="text_of_comment">${text_of_comment}</div>
+    </div>`;
 
                     document.getElementById('new_comment').value = '';
                     document.querySelector('.comments').prepend(hr);
