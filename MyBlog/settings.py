@@ -102,7 +102,7 @@ WSGI_APPLICATION = 'MyBlog.wsgi.application'
 #     }
 # }
 
-# POSTRESf
+# POSTRES
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
