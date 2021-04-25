@@ -176,7 +176,7 @@
                     new_comment_div.innerHTML = `
     {% for profile in profiles %}
         {% if profile.user == request.user %}
-            {% if prifile.picture %}
+            {% if profile.picture %}
                 <div class="author_avatar"><img src="{{ profile.picture.url }}" alt=""></div>
             {% else %}
                 <div class="author_avatar"><img src="{% static 'img/default.png' %}" alt=""></div>
