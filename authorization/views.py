@@ -26,16 +26,23 @@ class Login(View):
 
         self.form_login = LoginForm(request.POST)
         if self.form_login.is_valid():
+            users = [user.username for user in User.objects.all()]
             cd = self.form_login.cleaned_data
-            user = authenticate(request,
-                                username=cd['username'],
-                                password=cd['password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('blog:main_blog')
+            if cd['username'] in users:
+                user = authenticate(request,
+                                    username=cd['username'],
+                                    password=cd['password'])
+                if user is not None:
+                    if user.is_active:
+                        login(request, user)
+                        return redirect('blog:main_blog')
+                else:
+                    return render(request, self.template, {'form_login': self.form_login,
+                                                           'error': 'Неверный пароль'} | base_ctx)
             else:
-                return render(request, self.template, {'form_login': self.form_login} | base_ctx)
+                return render(request, self.template, {'form_login': self.form_login,
+                                                       'error': 'Нет пользователя с таким никнеймом'
+                                                       } | base_ctx)
 
     def get(self, request):
         base_ctx = {

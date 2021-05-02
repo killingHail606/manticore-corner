@@ -22,6 +22,7 @@
         <div class="col-sm-8 registration_my_form">
             <form action="" method="post">
                 {{ form.errors }}
+                <p class="bg-danger text-light p-1 pl-2">{{ error }}</p>
                 {{ form_login.as_p }}
                 {% csrf_token %}
                 <p><button name="login">Войти</button> или <a href="{% url 'authorization:registration' %}">Зарегистрироваться</a></p>
