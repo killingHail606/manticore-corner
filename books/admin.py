@@ -7,7 +7,7 @@ from .models import Book, BooksGenre, BooksSection
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'slug', 'date_pub', 'genre')
+    list_display = ('title', 'status', 'slug', 'date_pub', 'genre')
     search_fields = ('title', 'author')
     prepopulated_fields = {'slug': ('title', 'author')}
     date_hierarchy = 'date_pub'
