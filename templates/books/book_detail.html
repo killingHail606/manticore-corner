@@ -51,8 +51,8 @@
                         {{ book.description|safe|escape }}
                     </div>
                 </div>
+                <hr>
             {% endif %}
-            <hr>
             {% if book.content %}
                 <div class="book_content">
                     <h3>Содержание:</h3>
@@ -60,8 +60,8 @@
                         {{ book.content|safe|escape }}
                     </div>
                 </div>
+                <hr>
             {% endif %}
-            <hr>
             {% if book.retelling %}
                 <div class="book_retelling">
                     <h3>Краткое изложение книги:</h3>
@@ -69,8 +69,8 @@
                         {{ book.retelling|safe|escape }}
                     </div>
                 </div>
+                <hr>
             {% endif %}
-            <hr>
             {% if book.quotes %}
                 <div class="book_quotes">
                     <h3>Цитаты:</h3>

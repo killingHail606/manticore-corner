@@ -8,7 +8,7 @@
 }
 
 .book_left_block .title {
-    font-size: 18px;
+    font-size: 20px;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 15px;
@@ -31,6 +31,11 @@
     .detail_block {
         font-size: 14px;
     }
+}
+
+.book_quotes .detail_block ul li {
+    font-size: 1rem;
+    font-style: italic;
 }
 
 @media only screen and (max-width : 576px) {
