@@ -44,7 +44,7 @@ class Post(models.Model):
     status = models.CharField(max_length=10,
                               choices=STATUS_CHOICES,
                               default='draft')
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                         related_name='post_liked',
                                         blank=True)
