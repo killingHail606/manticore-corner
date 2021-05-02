@@ -188,3 +188,21 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'manticore.thoughts@gmail.com'
 EMAIL_HOST_PASSWORD = 'a6i3doi1!'
 DEFAULT_FROM_EMAIL = 'manticore.thoughts@gmail.com'
+
+
+# TinyMCE
+TINYMCE_DEFAULT_CONFIG = {
+    "height": "600px",
+    "width": "100%",
+    'theme': 'silver',
+    "menubar": "file edit view insert table help",
+    "plugins": "advlist autolink lists link image charmap anchor searchreplace visualblocks code"
+    "fullscreen insertdatetime media table paste code help wordcount spellchecker",
+    "toolbar": "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
+    "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "
+    "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
+    "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
+    "a11ycheck ltr rtl | showcomments addcomment code",
+    "custom_undo_redo_levels": 10,
+    "language": "ru_RU",  # To force a specific language instead of the Django current language.
+}

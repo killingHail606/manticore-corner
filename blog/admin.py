@@ -13,7 +13,7 @@ class PostAdmin(admin.ModelAdmin):
     date_hierarchy = 'date_pub'
     ordering = ('status', 'date_pub')
     formfield_overrides = {
-        models.TextField: {'widget': TinyMCE(attrs={'cols': 80, 'rows': 30})},
+        models.TextField: {'widget': TinyMCE()},
     }
 
 
