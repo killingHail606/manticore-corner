@@ -89,9 +89,11 @@
                             {% else %}
                                 <div class="author_avatar"><img src="{% static 'img/default.png' %}" alt=""></div>
                             {% endif %}
-
                         {% endif %}
                     {% endfor %}
+                    {% if comment.user.is_superuser %}
+                        <div class="author_avatar"><img src="{% static 'img/default.png' %}" alt=""></div>
+                    {% endif %}
 
                     <div class="comment_content">
                         <div class="info_comment">
