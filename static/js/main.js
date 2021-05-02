@@ -105,7 +105,7 @@ try {
 
 function go_to_comment(id_comment) {
 	let comment_block = document.querySelector(`#num-com-${id_comment}`);
-	let top_px = window.pageYOffset + ((comment_block.getBoundingClientRect().top + document.body.scrollTop) - 100);
+	let top_px = window.pageYOffset + ((comment_block.getBoundingClientRect().top + document.body.scrollTop) - 200);
 	window.scrollTo(0,top_px)
 
 	try {
