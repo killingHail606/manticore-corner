@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '%*_)wjp0)0%-(0$@w5uydc&-qxl7(s%@xgs3@p$i*x@e%aofnw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '193.164.150.161', '438511-cr02292.tmweb.ru', 'manticore-corner.ru',
@@ -94,25 +94,25 @@ WSGI_APPLICATION = 'MyBlog.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 #SQLITE
-# DATABASES = {
-#     'default': {
-#     'ENGINE': 'django.db.backends.sqlite3',
-#     'NAME': 'db.sqlite3', # This is where you put the name of the db file.
-#              # If one doesn't exist, it will be created at migration time.
-#     }
-# }
-
-# POSTRES
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'manticore_corner_db',
-        'USER': 'manticore_corner',
-        'PASSWORD': 'jij2gjf',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': 'db.sqlite3', # This is where you put the name of the db file.
+             # If one doesn't exist, it will be created at migration time.
     }
 }
+
+# POSTRES
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'manticore_corner_db',
+#         'USER': 'manticore_corner',
+#         'PASSWORD': 'jij2gjf',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
@@ -195,8 +195,10 @@ TINYMCE_DEFAULT_CONFIG = {
     "height": "600px",
     "width": "100%",
     'theme': 'silver',
-    "menubar": "file edit view insert table help",
-    "plugins": "advlist autolink lists link image charmap anchor searchreplace visualblocks code"
+    'skin': 'oxide-dark',
+    'content_css': 'dark',
+    "menubar": "file edit view insert format tools table help",
+    "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code "         
     "fullscreen insertdatetime media table paste code help wordcount spellchecker",
     "toolbar": "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
     "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "

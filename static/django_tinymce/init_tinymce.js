@@ -1,5 +1,12 @@
 'use strict';
 
+// tinymce.init({
+//   selector: 'textarea',  // change this value according to your HTML
+//   skin: 'oxide-dark',
+//   content_css: 'dark'  // > **Note**: This feature is only available for TinyMCE 5.1 and later.
+// });
+
+
 {
   function initTinyMCE(el) {
     if (el.closest('.empty-form') === null) {  // Don't do empty inlines
