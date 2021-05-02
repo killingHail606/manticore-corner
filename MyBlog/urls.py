@@ -20,7 +20,7 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('secret-admin/', admin.site.urls),
     path('', include(('blog.urls', 'blog'), namespace='blog')),
     path('books/', include(('books.urls', 'books'), namespace='books')),
     path('authorization/', include(('authorization.urls', 'authorization'), namespace='authorization')),

@@ -38,7 +38,11 @@
             <div class="buttons">
                 <div class="users">
                     {% if request.user.is_authenticated %}
-                        <span class="username"><a href="{% url 'authorization:user_page' %}">Здравствуй, {{ request.user.username }}.</a></span>
+                        {% if request.user.is_superuser %}
+                            <span class="username"><a href="secret-admin/">Перейти в админку</a></span>
+                        {% else %}
+                            <span class="username"><a href="{% url 'authorization:user_page' %}">Здравствуй, {{ request.user.username }}.</a></span>
+                        {% endif %}
 
                     {% else %}
                         <div class="menu-sign-in">
