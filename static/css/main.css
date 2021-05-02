@@ -1159,6 +1159,30 @@ footer .vertical_hr {
     display: none;
 }
 
+.reply {
+    cursor: pointer;
+    font-weight: 400;
+    color: silver;
+}
+
+.reply:hover {
+    color: #1b1e21;
+    text-decoration: underline;
+}
+
+.reply_nick {
+    color: #ff9311;
+    cursor: pointer;
+}
+
+.reply_nick:hover {
+    text-decoration: underline;
+}
+
+.found-answer {
+    padding-left: 30px;
+}
+
 
 @media only screen and (max-width : 1230px) {
     .menu {

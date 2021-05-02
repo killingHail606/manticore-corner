@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
@@ -95,9 +97,16 @@ class PostDetailView(TemplateResponseMixin, View):
         post.views += 1
         post.save()
         comment_form = CommentForm()
+
+        try:
+            last_id = int(list(Comment.objects.all().order_by('number_comment'))[-1].number_comment)
+        except IndexError:
+            last_id = 0
+        print(last_id)
         ctx = {'post': post,
                'comment_form': comment_form,
                'profiles': profiles,
+               'last_id': last_id,
                } | base_ctx
         return self.render_to_response(ctx)
 
@@ -171,8 +180,23 @@ class PrivacyView(TemplateResponseMixin, View):
 def post_comment(request):
     post_id = request.POST['id']
     text_of_comment = request.POST['text_of_comment']
+    num_comments = int(request.POST['num_comments'])
+    answer_num = request.POST['answer_num']
 
-    comment = Comment.objects.create(user=request.user, body=text_of_comment)
+    try:
+        last_id = int(list(Comment.objects.all().order_by('number_comment'))[-1].number_comment)
+    except IndexError:
+        last_id = 0
+    print(last_id)
+
+    if answer_num != 'false':
+        username = text_of_comment.split(',')[0]
+        reply_to = f'<span class="reply_nick" onclick="go_to_comment(\'{str(answer_num)}\')">{username}</span>'
+        text_of_comment = text_of_comment[len(username):]
+        comment = Comment.objects.create(user=request.user, body=text_of_comment,
+                                         reply_to=reply_to, number_comment=last_id+1)
+    else:
+        comment = Comment.objects.create(user=request.user, body=text_of_comment, number_comment=last_id+1)
 
     if post_id:
         try:

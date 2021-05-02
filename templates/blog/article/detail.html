@@ -70,6 +70,7 @@
                 <form action="" method="post">
                     {% csrf_token %}
                     {{ comment_form.as_p }}
+                    <input type="hidden" value="{{ last_id }}" id="last_id">
                     <a href="" data-id="{{ post.id }}" class="comment_button">Отправить комментарий</a>
                 </form>
             </div>
@@ -81,7 +82,7 @@
         <div class="comments">
 
             {% for comment in post.comments.all %}
-                <div class="comment">
+                <div class="comment" id="num-com-{{ comment.number_comment }}">
                     {% for profile in profiles %}
                         {% if profile.user == comment.user %}
                             {% if profile.picture %}
@@ -100,9 +101,15 @@
                     <div class="comment_content">
                         <div class="info_comment">
                             {% if comment.user.is_superuser %}
-                                <div class="name" style="color: #1d9cdf;font-weight: 500;">MANTICORE606</div>
+                                <div class="name">
+                                    <span style="color: #1d9cdf;font-weight: 500;">MANTICORE606</span> -
+                                    <span class="reply" onclick="answer({{ comment.number_comment }}, 'MANTICORE606')">Ответить</span>
+                                </div>
                             {% else %}
-                                <div class="name">{{ comment.user.username }}</div>
+                                <div class="name">
+                                    <span>{{ comment.user.username }}</span> -
+                                    <span class="reply" onclick="answer({{ comment.number_comment }}, '{{ comment.user.username }}')">Ответить</span>
+                                </div>
                             {% endif %}
                             <div class="date_published_comment">
                                 {% timezone "Europe/Kiev" %}
@@ -112,7 +119,12 @@
                             </div>
                         </div>
                         <div class="text_of_comment">
-                            {{ comment.body }}
+                            {% if comment.reply_to %}
+                                <span>{{ comment.reply_to|safe|escape }}</span>{{ comment.body }}
+                            {% else %}
+                                {{ comment.body }}
+                            {% endif %}
+
                         </div>
                     </div>
                 </div>
@@ -150,64 +162,101 @@
                 }
             );
         });
-
+        let users_comments = 0;
         $('a.comment_button').click(function(e){
             let text_comment = document.getElementById('new_comment').value;
-            if (text_comment == '') return null;
-            e.preventDefault();
-            $.post('{% url "blog:post_comment" %}',
-                {
-                    id: $(this).data('id'),
-                    text_of_comment: text_comment
-                },
-                function(data){
-                    let new_comment_div = document.createElement('div');
-                    let hr = document.createElement('hr');
+            let button_send = document.querySelector('.comment_button');
+            let answer_num = false;
 
-                    let text_of_comment = document.getElementById('new_comment').value;
+            if (button_send.hasAttribute('data-answer')) answer_num = button_send.getAttribute('data-answer');
 
-                    {# Форматирование даты, просто псц... #}
-                    let now = new Date();
-                    let year = now.getFullYear();
+            if (text_comment !== '') {
+                e.preventDefault();
+                users_comments++;
+                $.post('{% url "blog:post_comment" %}',
+                    {
+                        id: $(this).data('id'),
+                        text_of_comment: text_comment,
+                        answer_num: answer_num,
+                        num_comments: users_comments,
+                    },
+                    function(data){
+                        let new_comment_div = document.createElement('div');
+                        let hr = document.createElement('hr');
 
-                    let month = String(now.getMonth() + 1)
-                    if(month.length === 1) {month = '0' + month}
+                        let text_of_comment = document.getElementById('new_comment').value;
 
-                    let day = String(now.getDate());
-                    if(day.length === 1) {day = '0' + day}
+                        {# Форматирование даты, просто псц... #}
+                        let now = new Date();
+                        let year = now.getFullYear();
 
-                    let hour = now.getHours();
-                    let minutes = String(now.getMinutes());
-                    if(minutes.length === 1) {minutes = '0' + minutes}
+                        let month = String(now.getMonth() + 1)
+                        if(month.length === 1) {month = '0' + month}
 
-                    let time_of_comment = `${year}.${month}.${day} - ${hour}:${minutes}`
+                        let day = String(now.getDate());
+                        if(day.length === 1) {day = '0' + day}
 
-                    new_comment_div.className = 'comment';
-                    new_comment_div.innerHTML = `
-    {% for profile in profiles %}
-        {% if profile.user == request.user %}
-            {% if profile.picture %}
-                <div class="author_avatar"><img src="{{ profile.picture.url }}" alt=""></div>
-            {% else %}
-                <div class="author_avatar"><img src="{% static 'img/default.png' %}" alt=""></div>
-            {% endif %}
+                        let hour = now.getHours();
+                        let minutes = String(now.getMinutes());
+                        if(minutes.length === 1) {minutes = '0' + minutes}
 
-        {% endif %}
-    {% endfor %}
+                        let time_of_comment = `${year}.${month}.${day} - ${hour}:${minutes}`
 
-    <div class="comment_content">
-        <div class="info_comment">
-            <div class="name">{{ request.user.username }}</div>
-            <div class="date_published_comment">${time_of_comment}</div>
-        </div>
-        <div class="text_of_comment">${text_of_comment}</div>
-    </div>`;
+                        new_comment_div.className = 'comment';
 
-                    document.getElementById('new_comment').value = '';
-                    document.querySelector('.comments').prepend(hr);
-                    document.querySelector('.comments').prepend(new_comment_div);
+                        if (button_send.hasAttribute('data-answer')) {
+                            let num_comment = button_send.getAttribute('data-answer');
+                            let username = text_of_comment.split(',')[0];
+                            let link = `<span class="reply_nick" onclick="go_to_comment('${num_comment}')">${username}</span>`
+                            text_of_comment = link + text_of_comment.slice(username.length)
+                        }
+                        let id_new_comment;
+                        try {
+                            id_new_comment = Number(document.querySelectorAll('.comment')[0].id.split('-').slice(-1)[0]) + 1;
+                        } catch (e) {
+                            id_new_comment = Number(document.querySelector('#last_id').value) + 1
+                        }
 
-                }
-            );
+                        new_comment_div.setAttribute('id', `num-com-${id_new_comment}`);
+                        new_comment_div.innerHTML = `
+                            {% for profile in profiles %}
+                                {% if profile.user == request.user %}
+                                    {% if profile.picture %}
+                                        <div class="author_avatar"><img src="{{ profile.picture.url }}" alt="Аватарка"></div>
+                                    {% else %}
+                                        <div class="author_avatar"><img src="{% static 'img/default.png' %}" alt="Аватарка"></div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if request.user.is_superuser %}
+                                <div class="author_avatar"><img src="{% static 'img/admin.jpg' %}" alt="Аватарка"></div>
+                            {% endif %}
+
+                            <div class="comment_content">
+                                <div class="info_comment">
+                                    {% if request.user.is_superuser %}
+                                        <div class="name">
+                                            <span style="color: #1d9cdf;font-weight: 500;">MANTICORE606</span> -
+                                            <span class="reply" onclick="answer(${id_new_comment}, 'MANTICORE606')">Ответить</span>
+                                        </div>
+                                    {% else %}
+                                        <div class="name">
+                                            <span>{{ request.user.username }}</span> -
+                                            <span class="reply" onclick="answer(${id_new_comment}, '{{ request.user.username }}')">Ответить</span>
+                                        </div>
+                                    {% endif %}
+                                    <div class="date_published_comment">${time_of_comment}</div>
+                                </div>
+                                <div class="text_of_comment">${text_of_comment}</div>
+                            </div>`;
+
+                        document.getElementById('new_comment').value = '';
+                        document.querySelector('.comments').prepend(hr);
+                        document.querySelector('.comments').prepend(new_comment_div);
+
+                    }
+                );
+            }
         });
+{#    </script>#}
 {% endblock %}

@@ -24,8 +24,6 @@ function search_hide() {
 
 function menu_show() {
 	let menu = document.querySelector('.menu-mobile')
-	console.log(menu)
-
 	menu.style.display = 'flex';
 }
 
@@ -64,9 +62,7 @@ try {
 			}
 		}
 	}
-} catch (e) {
-	
-}
+} catch (e) {}
 
 function showTabsContent(b){
 	if(tabContent[b].classList.contains('hide')){
@@ -77,22 +73,49 @@ function showTabsContent(b){
 	}
 }
 
-let form_label = document.querySelector('#update_avatar_form label');
+try {
+	let form_label = document.querySelector('#update_avatar_form label');
+	let button = document.querySelector('#id_picture')
+	button.addEventListener('change', () => {
+		let oFile = button.files[0];
+		form_label.innerText = oFile['name'];
+	});
+} catch (e) {}
 
-let button = document.querySelector('#id_picture')
-button.addEventListener('change', () => {
-	let oFile = button.files[0];
-	form_label.innerText = oFile['name'];
-	console.log();
-})
+let nick = '';
 
-// $(document).ready( function() {
-//   $('#falseinput').click(function(){
-//     $("#id_picture").click();
-//   });
-// });
-//
-// $('#id_picture').change(function() {
-//   $('#selected_filename').text($('#id_picture')[0].files[0].name);
-// });
+try {
+	let textarea = document.querySelector('#new_comment');
+	let button_send = document.querySelector('.comment_button')
+
+	function answer(num_com, username) {
+		button_send.setAttribute('data-answer', num_com)
+		textarea.value = `${username}, `;
+		textarea.focus();
+		nick = username;
+	}
+
+	textarea.addEventListener('input', () => {
+		if (nick !== textarea.value.split(',')[0]) {
+			button_send.removeAttribute('data-answer');
+		}
+	})
+} catch (e) {}
+
+
+function go_to_comment(id_comment) {
+	let comment_block = document.querySelector(`#num-com-${id_comment}`);
+	let top_px = window.pageYOffset + ((comment_block.getBoundingClientRect().top + document.body.scrollTop) - 100);
+	window.scrollTo(0,top_px)
+
+	try {
+		document.querySelector('.found-answer').classList.remove('found-answer');
+	} catch (e) { }
+
+	comment_block.classList.add('found-answer');
+}
+
+
+
+
 

@@ -21,6 +21,8 @@ class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='author', on_delete=models.CASCADE, unique=False)
     body = models.CharField(max_length=1000)
     date_pub = models.DateTimeField(auto_now_add=True)
+    number_comment = models.IntegerField()
+    reply_to = models.CharField(max_length=300, blank=True)
 
     class Meta:
         ordering = ('-date_pub',)
