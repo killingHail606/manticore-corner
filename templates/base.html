@@ -39,7 +39,7 @@
                 <div class="users">
                     {% if request.user.is_authenticated %}
                         {% if request.user.is_superuser %}
-                            <span class="username"><a href="secret-admin/">Перейти в админку</a></span>
+                            <span class="username"><a href="/secret-admin/">Перейти в админку</a></span>
                         {% else %}
                             <span class="username"><a href="{% url 'authorization:user_page' %}">Здравствуй, {{ request.user.username }}.</a></span>
                         {% endif %}
