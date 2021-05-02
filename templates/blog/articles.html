@@ -23,12 +23,12 @@
 
 {% block aside %}
     <div class="categories aside">
-        <h3>Категории</h3>
-        <div class="categories-items">
-            {% for tag in all_tags %}
-                <a href="{% url 'blog:articles_categories' tag.slug %}">{{ tag }}</a>
-            {% endfor %}
-        </div>
+{#        <h3>Категории</h3>#}
+{#        <div class="categories-items">#}
+{#            {% for tag in all_tags %}#}
+{#                <a href="{% url 'blog:articles_categories' tag.slug %}">{{ tag }}</a>#}
+{#            {% endfor %}#}
+{#        </div>#}
 
     </div>
 {% endblock %}
