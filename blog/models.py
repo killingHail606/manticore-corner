@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -10,7 +11,6 @@ from django.utils.html import strip_tags
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from comment.models import Comment
 from taggit.managers import TaggableManager
 from tinymce.models import HTMLField
 
@@ -34,7 +34,6 @@ class Post(models.Model):
         ('draft', 'Черновик'),
         ('published', 'Опубликовано'),
     )
-
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique=250)
     date_pub = models.DateTimeField(auto_now_add=True)

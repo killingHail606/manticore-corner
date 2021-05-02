@@ -95,7 +95,11 @@
 
                     <div class="comment_content">
                         <div class="info_comment">
-                            <div class="name">{{ comment.user.username }}</div>
+                            {% if comment.user.is_superuser %}
+                                <div class="name" style="color: silver;font-weight: normal;">MANTICORE606&#9745;</div>
+                            {% else %}
+                                <div class="name">{{ comment.user.username }}</div>
+                            {% endif %}
                             <div class="date_published_comment">
                                 {% timezone "Europe/Kiev" %}
                                     {{ comment.date_pub|date:'Y.m.d - H:i' }}
@@ -144,11 +148,13 @@
         });
 
         $('a.comment_button').click(function(e){
+            let text_comment = document.getElementById('new_comment').value;
+            if (text_comment == '') return null;
             e.preventDefault();
             $.post('{% url "blog:post_comment" %}',
                 {
                     id: $(this).data('id'),
-                    text_of_comment: document.getElementById('new_comment').value
+                    text_of_comment: text_comment
                 },
                 function(data){
                     let new_comment_div = document.createElement('div');
