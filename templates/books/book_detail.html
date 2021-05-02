@@ -44,33 +44,41 @@
             </table>
         </div>
         <div class="col-sm-8 book_main">
-            <div class="book_description">
-                <h3>Описание:</h3>
-                <div class="detail_block">
-                    {{ book.description|safe|escape }}
+            {% if book.description %}
+                <div class="book_description">
+                    <h3>Описание:</h3>
+                    <div class="detail_block">
+                        {{ book.description|safe|escape }}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
             <hr>
-            <div class="book_content">
-                <h3>Содержание:</h3>
-                <div class="detail_block">
-                    {{ book.content|safe|escape }}
+            {% if book.content %}
+                <div class="book_content">
+                    <h3>Содержание:</h3>
+                    <div class="detail_block">
+                        {{ book.content|safe|escape }}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
             <hr>
-            <div class="book_retelling">
-                <h3>Краткое изложение книги:</h3>
-                <div class="detail_block">
-                    {{ book.retelling|safe|escape }}
+            {% if book.retelling %}
+                <div class="book_retelling">
+                    <h3>Краткое изложение книги:</h3>
+                    <div class="detail_block">
+                        {{ book.retelling|safe|escape }}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
             <hr>
-            <div class="book_quotes">
-                <h3>Цитаты:</h3>
-                <div class="detail_block">
-                    {{ book.quotes|safe|escape }}
+            {% if book.quotes %}
+                <div class="book_quotes">
+                    <h3>Цитаты:</h3>
+                    <div class="detail_block">
+                        {{ book.quotes|safe|escape }}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

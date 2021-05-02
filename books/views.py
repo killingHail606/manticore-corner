@@ -48,7 +48,7 @@ class BooksGenreView(TemplateResponseMixin, View):
 
         book_section = BooksSection.objects.get(slug=kwargs['slug_section'])
         book_genre = BooksGenre.objects.get(slug=kwargs['slug_genre'])
-        books = Book.objects.filter(genre=book_genre)
+        books = Book.objects.filter(genre=book_genre, status='published')
 
         return self.render_to_response({'book_section': book_section,
                                         'book_genre': book_genre,

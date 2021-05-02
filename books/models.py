@@ -38,6 +38,13 @@ class BooksGenre(models.Model):
 
 
 class Book(models.Model):
+    STATUS_CHOICES = (
+        ('draft', 'Черновик'),
+        ('published', 'Опубликовано'),
+    )
+    status = models.CharField(max_length=10,
+                              choices=STATUS_CHOICES,
+                              default='draft')
     title = models.CharField(max_length=250)
     author = models.CharField(max_length=150)
     book_cover = models.ImageField(upload_to='books/%Y/%m/%d')
