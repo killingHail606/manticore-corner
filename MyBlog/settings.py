@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+from environs import Env
+
+
+env = Env()
+env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%*_)wjp0)0%-(0$@w5uydc&-qxl7(s%@xgs3@p$i*x@e%aofnw'
+SECRET_KEY = env.str("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -29,7 +34,6 @@ ALLOWED_HOSTS = [
     '193.164.150.161', '438511-cr02292.tmweb.ru', 'manticore-corner.ru',
     'www.manticore-corner.ru', 'localhost', '127.0.0.1'
 ]
-
 
 # Application definition
 
@@ -102,15 +106,15 @@ WSGI_APPLICATION = 'MyBlog.wsgi.application'
 #     }
 # }
 
-# POSTRES
+# POSTGRES
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'manticore_corner_db',
-        'USER': 'manticore_corner',
-        'PASSWORD': 'jij2gjf',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': env.str("DB_NAME"),
+        'USER': env.str("DB_USER"),
+        'PASSWORD': env.str("DB_PASSWORD"),
+        'HOST': env.str("DB_HOST"),
+        'PORT': env.str("DB_PORT"),
     }
 }
 
@@ -138,8 +142,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1078649821977-v5pb725fr9lcutgu13kf2nkbm0apjr94.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'BOigxxvi-XmSEBK4BbYa4iS3'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.str("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
 
 LOGIN_URL = '/auth/login/google-oauth2/'
 
@@ -147,8 +151,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
-
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -183,11 +185,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # EMAIL_BACKEND = 'mailer.backend.DbBackend'
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'manticore.thoughts@gmail.com'
-EMAIL_HOST_PASSWORD = 'a6i3doi1!'
-DEFAULT_FROM_EMAIL = 'manticore.thoughts@gmail.com'
+EMAIL_HOST = env.str("EMAIL_HOST")
+EMAIL_PORT = env.str("EMAIL_PORT")
+EMAIL_HOST_USER = env.str("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = env.str("DEFAULT_FROM_EMAIL")
 
 
 # TinyMCE
